@@ -102,10 +102,11 @@ const determineTripsValue = values => {
     return "";
   }
 
-  let result = `030000${tripsValue.getValueAsString()}`;
+  let result = "030000";
+  result += tripsValue.getValueAsString();
   let count = 0;
   for (const value of VALUES_DESC) {
-    if (value !== tripsValue && values[value.value].length > 0) {
+    if (value !== tripsValue && values[value.value].length === 1) {
       result += value.getValueAsString();
 
       if (++count === 2) {
@@ -115,9 +116,45 @@ const determineTripsValue = values => {
   }
 };
 
+/**
+ * Returns a value of the form "02 00 00 P1 P2 xx" without spaces, or the empty
+ * string if there is no two pair.
+ */
 const determineTwoPairValue = values => {
-  // TODO: Compute some value based on the 2 pairs and top card after.
-  return "";
+  let count = 0;
+  let pairOneValue;
+  let pairTwoValue;
+
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 2) {
+      if (count === 0) {
+        pairOneValue = value;
+        count++;
+      } else if (count === 1) {
+        pairTwoValue = value;
+        break;
+      }
+    }
+  }
+
+  if (!pairOneValue || !pairTwoValue) {
+    return "";
+  }
+
+  let result = "020000";
+  result += pairOneValue.getValueAsString();
+  result += pairTwoValue.getValueAsString();
+
+  for (const value of VALUES_DESC) {
+    if (
+      value !== pairOneValue &&
+      value !== pairTwoValue &&
+      values[value.value].length === 1
+    ) {
+      result += value.getValueAsString();
+      return result;
+    }
+  }
 };
 
 const determineOnePairValue = values => {
