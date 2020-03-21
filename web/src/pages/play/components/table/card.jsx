@@ -1,5 +1,5 @@
 import React from "react";
-import "./card.css";
+import "pages/play/components/table/card.css";
 
 const Card = () => {
   return <div className="card"></div>;

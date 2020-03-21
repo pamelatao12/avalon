@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./tableCards.css";
-import Card from "./card";
+import "pages/play/components/table/tableCards.css";
+import Card from "pages/play/components/table/card";
 
 const TableCards = () => {
   const [burn, setBurn] = useState(false);

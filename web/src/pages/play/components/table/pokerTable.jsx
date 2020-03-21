@@ -1,7 +1,7 @@
 import React from "react";
-import "./pokerTable.css";
-import TableCards from "./tableCards";
-import Player from "./player";
+import "pages/play/components/table/pokerTable.css";
+import TableCards from "pages/play/components/table/tableCards";
+import Player from "pages/play/components/table/player";
 
 const PokerTable = () => {
   return (
