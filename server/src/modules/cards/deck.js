@@ -1,6 +1,6 @@
-import { SUITS } from "./modules/cards/suit";
-import { VALUES } from "./modules/cards/value";
-import { Card } from "./modules/cards/card";
+import { SUITS } from "modules/cards/suit";
+import { VALUES } from "modules/cards/value";
+import { Card } from "modules/cards/card";
 
 class Deck {
   constructor() {
