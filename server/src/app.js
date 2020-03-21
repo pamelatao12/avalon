@@ -4,7 +4,7 @@ import socketIo from "socket.io";
 import routes from "./routes";
 import { determineHandValue } from "./modules/cards/hand";
 import Card from "./modules/cards/card";
-import { ACE, THREE, TWO } from "./modules/cards/value";
+import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
 import { HEART } from "./modules/cards/suit";
 
 const port = process.env.PORT || 4000;
@@ -28,9 +28,9 @@ server.listen(port, () => {
   // TODO: Remove debug stuff below.
   determineHandValue([
     new Card(ACE, HEART),
-    new Card(THREE, HEART),
+    new Card(FIVE, HEART),
     new Card(TWO, HEART),
-    new Card(TWO, HEART),
+    new Card(TEN, HEART),
     new Card(THREE, HEART)
   ]);
 });

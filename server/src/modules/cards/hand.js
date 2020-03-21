@@ -162,7 +162,21 @@ const determineOnePairValue = values => {
   return "";
 };
 
+/**
+ * Returns a value of the form "00 xx xx xx xx xx" without spaces.
+ */
 const determineHighCardValue = values => {
-  // TODO: Compute some value based on top 5 cards.
-  return "";
+  let count = 0;
+  let result = "00";
+
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      count++;
+      result += value.getValueAsString();
+
+      if (count === 5) {
+        return result;
+      }
+    }
+  }
 };
