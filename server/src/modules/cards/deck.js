@@ -1,10 +1,17 @@
-import { SUITS } from "modules/cards/suit";
-import { VALUES } from "modules/cards/value";
-import { Card } from "modules/cards/card";
+const { SUITS } = require("./modules/cards/suit");
+const { VALUES } = require("./modules/cards/value");
+const Card = require("./modules/cards/card");
 
-class Deck {
+export default class Deck {
   constructor() {
-    this.cards = this.initializeCards();
+    this.reset();
+  }
+
+  reset() {
+    this.cards = [];
+    this.nextCardIndex = 0;
+    this.initializeCards();
+    this.shuffle();
   }
 
   initializeCards() {
@@ -15,5 +22,31 @@ class Deck {
         cards.push(new Card(suit, value));
       });
     });
+
+    return cards;
+  }
+
+  /**
+   * Shuffles the deck of cards.
+   */
+  shuffle() {
+    // Move down the deck so random number logic is simpler.
+    for (let i = this.cards.length - 1; i > 0; i--) {
+      const swapIndex = Math.random() * (i + 1);
+      const tempCard = this.cards[i];
+      this.cards[i] = this.cards[swapIndex];
+      this.cards[swapIndex] = tempCard;
+    }
+  }
+
+  /**
+   * Deals out the next card.
+   */
+  deal() {
+    return this.cards[this.nextCardIndex++];
+  }
+
+  toString() {
+    return this.cards.map(card => card.toString()).join("\n");
   }
 }
