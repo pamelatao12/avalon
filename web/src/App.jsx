@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import socketIOClient from "socket.io-client";
+import React from "react";
+import PokerTable from "./pokerTable";
 
 function App() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    const socket = socketIOClient("http://127.0.0.1:4001");
-    socket.on("FromAPI", setData);
-  }, []);
-
-  return <div>{data ? <p>Time is {data}</p> : <p>Loading...</p>}</div>;
+  return (
+    <div className="App">
+      <PokerTable />
+    </div>
+  );
 }
 
 export default App;

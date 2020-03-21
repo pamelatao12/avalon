@@ -1,0 +1,6 @@
+.table {
+  background-image: url(/pokerTable.svg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
