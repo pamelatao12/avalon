@@ -1,11 +1,15 @@
 .action {
-  width: 100px;
-  height: 48px;
+  width: 135px;
+  height: 52px;
   padding: 10px 22px;
   margin: 6px;
   color: white;
   border-style: solid white 1px;
   border-radius: 4px;
+}
+
+.action:hover {
+  cursor: pointer;
 }
 
 .fold,
