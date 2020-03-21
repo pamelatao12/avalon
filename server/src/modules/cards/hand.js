@@ -14,13 +14,13 @@
  * - high card:        00 xx xx xx xx xx
  */
 import { SUITS } from "./suit";
-import { ACE } from "./value";
+import { ACE, VALUES } from "./value";
 
 export const determineHandValue = cards => {
   // Mapping of values/suits to list of cards corresponding to them.
   const [values, suits] = countValuesAndSuits(cards);
 
-  const flushValue = determineFlushValue(cards, suits);
+  const flushValue = determineFlushValue(suits);
 
   const straightValue = determineStraightValue(cards, values);
 
@@ -39,7 +39,7 @@ const countValuesAndSuits = cards => {
 
   // Initialize list with empty arrays to simplify adding values.
   SUITS.forEach(suit => (suits[suit] = []));
-  VALUES.forEach(value => (values[value] = []));
+  VALUES.forEach(value => (values[value.value] = []));
 
   cards.forEach(card => {
     const value = card.value.value;
@@ -58,10 +58,18 @@ const countValuesAndSuits = cards => {
  * Returns a value of the form "05 xx xx xx xx xx" without spaces, or the empty
  * string if there is no flush.
  */
-const determineFlushValue = (cards, suits) => {
+const determineFlushValue = suits => {
   for (const suit of SUITS) {
-    if (suits[suit].length >= 5) {
-      // TODO: Compute some value that takes into account all 5 cards.
+    const cards = suits[suit];
+    if (cards.length >= 5) {
+      // Sort in desc order.
+      cards.sort((a, b) => -1 * a.compareTo(b));
+
+      let result = "05";
+      for (let i = 0; i < 5; i++) {
+        result += cards[i].value.getValueAsString();
+      }
+      return result;
     }
   }
 

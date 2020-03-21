@@ -2,6 +2,10 @@ import express from "express";
 import http from "http";
 import socketIo from "socket.io";
 import routes from "./routes";
+import { determineHandValue } from "./modules/cards/hand";
+import Card from "./modules/cards/card";
+import { ACE } from "./modules/cards/value";
+import { HEART } from "./modules/cards/suit";
 
 const port = process.env.PORT || 4000;
 
@@ -18,7 +22,18 @@ const getApiAndEmit = async socket => {
 
 let interval;
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+
+  // TODO: Remove debug stuff below.
+  determineHandValue([
+    new Card(ACE, HEART),
+    new Card(ACE, HEART),
+    new Card(ACE, HEART),
+    new Card(ACE, HEART),
+    new Card(ACE, HEART)
+  ]);
+});
 
 io.on("connection", socket => {
   console.log("New client connected");
