@@ -2,4 +2,4 @@
 
 ## Local Development
 
-`npm run server`
+`npm run start`

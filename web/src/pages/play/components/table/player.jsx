@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./player.css";
-import Card from "./card";
+import "pages/play/components/table/player.css";
+import Card from "pages/play/components/table/card";
 
 const Player = ({ name, pic }) => {
   const [cards, setCards] = useState([["Q", "Spades"], ["10", "Clubs"]]);
