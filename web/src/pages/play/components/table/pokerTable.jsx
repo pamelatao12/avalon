@@ -5,15 +5,15 @@ import Player from "pages/play/components/table/player";
 
 const PokerTable = () => {
   const [players, setPlayers] = useState([
-    ["Pamela", "./yay.jpg", 1],
-    ["David", "./yay2.jpg", 2],
-    ["Lance", "./yay3.jpg", 3],
-    ["Peter", "./yay4.jpg", 4],
-    ["Joe", "./yay5.jpg", 5],
-    ["Anthony", "./yay6.jpg", 6],
-    ["Carmen", "./yay7.jpg", 7],
-    ["PlayerX", "./yay8.jpg", 8],
-    ["PlayerY", "./yay9.jpg", 9]
+    ["Pamela", "./yay.jpg", 1, false],
+    ["David", "./yay2.jpg", 2, true],
+    ["Lance", "./yay3.jpg", 3, true],
+    ["Peter", "./yay4.jpg", 4, true],
+    ["Joe", "./yay5.jpg", 5, true],
+    ["Anthony", "./yay6.jpg", 6, true],
+    ["Carmen", "./yay7.jpg", 7, true],
+    ["Yaslin", "./yay8.jpg", 8, true],
+    ["Earl", "./yay9.jpg", 9, false]
   ]);
 
   return (
@@ -24,6 +24,7 @@ const PokerTable = () => {
             name={player[0]}
             pic={player[1]}
             position={player[2]}
+            playing={player[3]}
             key={i}
           />
         ))}
