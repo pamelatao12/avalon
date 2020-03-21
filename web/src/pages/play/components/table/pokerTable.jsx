@@ -1,5 +1,5 @@
 import React from "react";
-import "pages/play/components/table/pokerTable.module.css";
+import styles from "pages/play/components/table/pokerTable.module.css";
 import TableCards from "pages/play/components/table/tableCards";
 import Player from "pages/play/components/table/player";
 
