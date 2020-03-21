@@ -22,15 +22,16 @@ export const determineHandValue = cards => {
 
   const flushValue = determineFlushValue(suits);
 
-  const straightValue = determineStraightValue(cards, values);
+  const straightValue = determineStraightValue(values);
 
-  const tripsValue = determineTripsValue(cards, values);
+  const tripsValue = determineTripsValue(values);
+  console.log(tripsValue);
 
-  const twoPairValue = determineTwoPairValue(cards, values);
+  const twoPairValue = determineTwoPairValue(values);
 
-  const onePairValue = determineOnePairValue(cards, values);
+  const onePairValue = determineOnePairValue(values);
 
-  const highCardValue = determineHighCardValue(cards, values);
+  const highCardValue = determineHighCardValue(values);
 };
 
 const countValuesAndSuits = cards => {
@@ -80,27 +81,27 @@ const determineFlushValue = suits => {
  * Returns a value of the form "04 00 00 00 00 xx" without spaces, or the empty
  * string if there is no straight.
  */
-const determineStraightValue = (cards, values) => {
+const determineStraightValue = values => {
   // TODO: Compute some value based on highest card in straight.
   return "";
 };
 
-const determineTripsValue = (cards, values) => {
+const determineTripsValue = values => {
   // TODO: Compute some value based on trips value and top 2 cards after.
   return "";
 };
 
-const determineTwoPairValue = (cards, values) => {
+const determineTwoPairValue = values => {
   // TODO: Compute some value based on the 2 pairs and top card after.
   return "";
 };
 
-const determineOnePairValue = (cards, values) => {
+const determineOnePairValue = values => {
   // TODO: Compute some value based on trips value and top 3 cards after.
   return "";
 };
 
-const determineHighCardValue = (cards, values) => {
+const determineHighCardValue = values => {
   // TODO: Compute some value based on top 5 cards.
   return "";
 };
