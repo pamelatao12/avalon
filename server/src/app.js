@@ -28,8 +28,8 @@ server.listen(port, () => {
   // TODO: Remove debug stuff below.
   determineHandValue([
     new Card(ACE, HEART),
-    new Card(FIVE, HEART),
-    new Card(TWO, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART),
     new Card(TEN, HEART),
     new Card(TEN, HEART)
   ]);

@@ -20,6 +20,8 @@ export const determineHandValue = cards => {
   // Mapping of values/suits to list of cards corresponding to them.
   const [values, suits] = countValuesAndSuits(cards);
 
+  const quadsValue = determineQuadsValue(values);
+
   const flushValue = determineFlushValue(suits);
 
   const straightValue = determineStraightValue(values);
@@ -52,6 +54,33 @@ const countValuesAndSuits = cards => {
   // Add ACE on the low end to facilitate straight computation.
   values[1] = values[ACE.value];
   return [values, suits];
+};
+
+/**
+ * Returns a value of the form "07 00 00 00 Q1 xx" without spaces, or the empty
+ * string if there is no quads.
+ */
+const determineQuadsValue = values => {
+  let quadValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 4) {
+      quadValue = value;
+      break;
+    }
+  }
+
+  if (!quadValue) {
+    return "";
+  }
+
+  let result = "07000000";
+  result += quadValue.getValueAsString();
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      result += value.getValueAsString();
+      return result;
+    }
+  }
 };
 
 /**
@@ -106,7 +135,7 @@ const determineTripsValue = values => {
   result += tripsValue.getValueAsString();
   let count = 0;
   for (const value of VALUES_DESC) {
-    if (value !== tripsValue && values[value.value].length === 1) {
+    if (values[value.value].length === 1) {
       result += value.getValueAsString();
 
       if (++count === 2) {
@@ -146,11 +175,7 @@ const determineTwoPairValue = values => {
   result += pairTwoValue.getValueAsString();
 
   for (const value of VALUES_DESC) {
-    if (
-      value !== pairOneValue &&
-      value !== pairTwoValue &&
-      values[value.value].length === 1
-    ) {
+    if (values[value.value].length === 1) {
       result += value.getValueAsString();
       return result;
     }
@@ -178,7 +203,7 @@ const determineOnePairValue = values => {
   result += pairValue.getValueAsString();
   let count = 0;
   for (const value of VALUES_DESC) {
-    if (value !== pairValue && values[value.value].length === 1) {
+    if (values[value.value].length === 1) {
       result += value.getValueAsString();
 
       if (++count === 3) {
