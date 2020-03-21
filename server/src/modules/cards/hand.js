@@ -1,85 +1,98 @@
 /**
  * Returns a deterministic value for an array of cards. This value can then
  * be used to determine whether one set of cards has a higher value over
- * another.
+ * another. The value is a string as described below, without the spaces.
  *
- * - straight flush:
- * - quads:
- * - full house:
- * - flush:
- * - straight:
- * - trips:
- * - two pair:
- * - pair:
- * - high card:
+ * - straight flush:   08 00 00 00 00 xx
+ * - quads:            07 00 00 00 Q1 xx
+ * - full house:       06 00 00 00 T1 P1
+ * - flush:            05 xx xx xx xx xx
+ * - straight:         04 00 00 00 00 xx
+ * - trips:            03 00 00 T1 xx xx
+ * - two pair:         02 00 00 P1 P2 xx
+ * - one pair:         01 00 P1 xx xx xx
+ * - high card:        00 xx xx xx xx xx
  */
 import { SUITS } from "./suit";
 import { ACE } from "./value";
 
 export const determineHandValue = cards => {
-  // Mapping of values/suits to number of occurrences.
-  const [valueCounts, suitCounts] = countValuesAndSuits(cards);
+  // Mapping of values/suits to list of cards corresponding to them.
+  const [values, suits] = countValuesAndSuits(cards);
 
-  const flushValue = determineFlushValue(cards, suitCounts);
+  const flushValue = determineFlushValue(cards, suits);
 
-  const straightValue = determineStraightValue(cards, valueCounts);
+  const straightValue = determineStraightValue(cards, values);
 
-  const tripsValue = determineTripsValue(cards, valueCounts);
+  const tripsValue = determineTripsValue(cards, values);
 
-  const twoPairValue = determineTwoPairValue(cards, valueCounts);
+  const twoPairValue = determineTwoPairValue(cards, values);
 
-  const pairValue = determinePairValue(cards, valueCounts);
+  const onePairValue = determineOnePairValue(cards, values);
 
-  const highCardValue = determineHighCardValue(cards, valueCounts);
+  const highCardValue = determineHighCardValue(cards, values);
 };
 
 const countValuesAndSuits = cards => {
-  const valueCounts = {};
-  const suitCounts = {};
+  const values = {};
+  const suits = {};
+
+  // Initialize list with empty arrays to simplify adding values.
+  SUITS.forEach(suit => (suits[suit] = []));
+  VALUES.forEach(value => (values[value] = []));
 
   cards.forEach(card => {
     const value = card.value.value;
-    valueCounts[value] = getCount(valueCounts, value) + 1;
+    values[value].push(card);
 
     const suit = card.suit;
-    suitCounts[suit] = getCount(suitCounts, suit) + 1;
+    suits[suit].push(card);
   });
 
   // Add ACE on the low end to facilitate straight computation.
-  valueCounts[1] = valueCounts[ACE.value];
-  return [valueCounts, suitCounts];
+  values[1] = values[ACE.value];
+  return [values, suits];
 };
 
-const determineFlushValue = (cards, suitCounts) => {
+/**
+ * Returns a value of the form "05 xx xx xx xx xx" without spaces, or the empty
+ * string if there is no flush.
+ */
+const determineFlushValue = (cards, suits) => {
   for (const suit of SUITS) {
-    if (getCount(suitCounts, suit) >= 5) {
+    if (suits[suit].length >= 5) {
       // TODO: Compute some value that takes into account all 5 cards.
     }
   }
 
-  return 0;
+  return "";
 };
 
-const determineStraightValue = (cards, valueCounts) => {
+/**
+ * Returns a value of the form "04 00 00 00 00 xx" without spaces, or the empty
+ * string if there is no straight.
+ */
+const determineStraightValue = (cards, values) => {
   // TODO: Compute some value based on highest card in straight.
+  return "";
 };
 
-const determineTripsValue = (cards, valueCounts) => {
+const determineTripsValue = (cards, values) => {
   // TODO: Compute some value based on trips value and top 2 cards after.
+  return "";
 };
 
-const determineTwoPairValue = (cards, valueCounts) => {
+const determineTwoPairValue = (cards, values) => {
   // TODO: Compute some value based on the 2 pairs and top card after.
+  return "";
 };
 
-const determinePairValue = (cards, valueCounts) => {
+const determineOnePairValue = (cards, values) => {
   // TODO: Compute some value based on trips value and top 3 cards after.
+  return "";
 };
 
-const determineHighCardValue = (cards, valueCounts) => {
+const determineHighCardValue = (cards, values) => {
   // TODO: Compute some value based on top 5 cards.
-};
-
-const getCount = (obj, value) => {
-  return obj[value] || 0;
+  return "";
 };

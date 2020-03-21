@@ -15,6 +15,10 @@ class Value {
   compareTo(other) {
     return this.value - other.value;
   }
+
+  getValueAsString() {
+    return `${this.value < 10 ? "0" : ""}${this.value}`;
+  }
 }
 
 export const TWO = new Value(2, "2");
