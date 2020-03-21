@@ -1,6 +1,6 @@
-const { SUITS } = require("./modules/cards/suit");
-const { VALUES } = require("./modules/cards/value");
-const Card = require("./modules/cards/card");
+import { SUITS } from "./modules/cards/suit";
+import { VALUES } from "./modules/cards/value";
+import Card from "./modules/cards/card";
 
 export default class Deck {
   constructor() {
