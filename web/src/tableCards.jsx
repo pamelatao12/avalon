@@ -14,8 +14,9 @@ const TableCards = () => {
 
   return (
     <div className="cardSet">
-      {cards.map(card => (
-        <Card key={card[0]} />
+      <Card key={burn} />
+      {cards.map((card, i) => (
+        <Card key={i} />
       ))}
     </div>
   );
