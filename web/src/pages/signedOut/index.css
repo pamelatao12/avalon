@@ -1,8 +1,5 @@
 .sign-in {
-  width: 100vw;
-  border: 3px black solid;
-}
-
-.username {
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
