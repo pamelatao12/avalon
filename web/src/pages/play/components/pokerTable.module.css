@@ -1,3 +1,6 @@
+.tableWrapper {
+  position: relative;
+}
 .table {
   background-image: url(/pokerTable.svg);
   height: 400px;
