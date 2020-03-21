@@ -19,8 +19,8 @@ const SignedOutPage = () => {
 
   return (
     <div className="sign-in">
-      <form>
-        <div>Signin In</div>
+      <form className="form">
+        <div>Sign In</div>
         <div className="username">
           <label>Username:</label>
           <input type="text" name="username" onChange={handleInputChange} />
