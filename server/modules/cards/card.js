@@ -13,6 +13,8 @@ export class Card {
   }
 
   compareTo(other) {
-    return 0;
+    return this.value === other.value
+      ? this.suit.compareTo(other.suit)
+      : this.value.compareTo(other.value);
   }
 }

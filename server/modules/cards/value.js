@@ -11,6 +11,10 @@ class Value {
   toShortString() {
     return name.index(0);
   }
+
+  compareTo(other) {
+    return this.value - other.value;
+  }
 }
 
 export const TWO = new Value(2, "2");
@@ -28,3 +32,19 @@ export const KING = new Value(13, "King");
 // Use 14 instead of 1 since this is the best card and it simplifies value
 // comparisons.
 export const ACE = new Value(14, "Ace");
+
+export const VALUES = [
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  JACK,
+  QUEEN,
+  KING,
+  ACE
+];

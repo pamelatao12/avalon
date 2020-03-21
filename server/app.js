@@ -1,7 +1,7 @@
-import express from "express";
-import http from "http";
-import socketIo from "socket.io";
-import index from "./routes/index";
+const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
+const index = require("./routes/index");
 
 const port = process.env.PORT || 4000;
 
