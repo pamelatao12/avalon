@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import "pages/play/components/table/player.css";
 import Card from "pages/play/components/table/card";
 
-const Player = ({ name, pic, position }) => {
-  const [cards, setCards] = useState([["Q", "Spades"], ["10", "Clubs"]]);
+const Player = ({ name, pic, position, playing }) => {
+  const [cards, setCards] = useState([["back", "back"], ["back", "back"]]);
   return (
     <div className={`playerProfile${position}`}>
       <div className={`playerCards${position}`}>
         {cards.map((card, i) => (
-          <Card key={i} number={card[0]} suit={card[1]} />
+          <Card
+            key={i}
+            number={playing == true ? card[0] : "undef"}
+            suit={playing == true ? card[1] : "undef"}
+          />
         ))}
       </div>
       <div className="playerDetailsWrapper">

@@ -1,4 +1,12 @@
 .card {
+  height: 50px;
+  width: 40px;
+  border-radius: 6px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.emptyCard {
   border: 2px dotted blue;
   height: 50px;
   width: 40px;
