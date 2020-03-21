@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "firebase/auth";
 import "./index.css";
 
 // TODO: Lance.
@@ -17,9 +18,15 @@ const SignedOutPage = () => {
     });
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    debugger;
+    // firebase.auth().signInWithEmailAndPassword(input.email, input.password);
+  }
+
   return (
     <div className="sign-in">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div>Sign In</div>
         <div className="username">
           <label>Username:</label>
