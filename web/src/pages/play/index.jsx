@@ -1,5 +1,5 @@
 import React from "react";
-import PokerTable from "./components/pokerTable";
+import PokerTable from "./components/table/pokerTable";
 
 const PlayPage = () => {
   return (
