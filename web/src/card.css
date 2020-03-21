@@ -1,0 +1,6 @@
+.card {
+  border: 2px dotted blue;
+  height: 50px;
+  width: 40px;
+  border-radius: 6px;
+}
