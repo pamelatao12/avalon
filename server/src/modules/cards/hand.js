@@ -14,7 +14,7 @@
  * - high card:        00 xx xx xx xx xx
  */
 import { SUITS } from "./suit";
-import { ACE, VALUES } from "./value";
+import { ACE, VALUES, VALUES_DESC } from "./value";
 
 export const determineHandValue = cards => {
   // Mapping of values/suits to list of cards corresponding to them.
@@ -25,7 +25,6 @@ export const determineHandValue = cards => {
   const straightValue = determineStraightValue(values);
 
   const tripsValue = determineTripsValue(values);
-  console.log(tripsValue);
 
   const twoPairValue = determineTwoPairValue(values);
 
@@ -86,9 +85,34 @@ const determineStraightValue = values => {
   return "";
 };
 
+/**
+ * Returns a value of the form "03 00 00 T1 xx xx" without spaces, or the empty
+ * string if there is no trips.
+ */
 const determineTripsValue = values => {
-  // TODO: Compute some value based on trips value and top 2 cards after.
-  return "";
+  let tripsValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 3) {
+      tripsValue = value;
+      break;
+    }
+  }
+
+  if (!tripsValue) {
+    return "";
+  }
+
+  let result = `030000${tripsValue.getValueAsString()}`;
+  let count = 0;
+  for (const value of VALUES_DESC) {
+    if (value !== tripsValue && values[value.value].length > 0) {
+      result += value.getValueAsString();
+
+      if (++count === 2) {
+        return result;
+      }
+    }
+  }
 };
 
 const determineTwoPairValue = values => {

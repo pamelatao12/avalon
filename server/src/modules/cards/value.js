@@ -52,3 +52,6 @@ export const VALUES = [
   KING,
   ACE
 ];
+
+const valuesCopy = [...VALUES];
+export const VALUES_DESC = valuesCopy.reverse();
