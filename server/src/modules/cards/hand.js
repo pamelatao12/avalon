@@ -157,9 +157,35 @@ const determineTwoPairValue = values => {
   }
 };
 
+/**
+ * Returns a value of the form "01 00 P1 xx xx xx" without spaces, or the empty
+ * string if there is no one pair.
+ */
 const determineOnePairValue = values => {
-  // TODO: Compute some value based on trips value and top 3 cards after.
-  return "";
+  let pairValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 2) {
+      pairValue = value;
+      break;
+    }
+  }
+
+  if (!pairValue) {
+    return "";
+  }
+
+  let result = "0100";
+  result += pairValue.getValueAsString();
+  let count = 0;
+  for (const value of VALUES_DESC) {
+    if (value !== pairValue && values[value.value].length === 1) {
+      result += value.getValueAsString();
+
+      if (++count === 3) {
+        return result;
+      }
+    }
+  }
 };
 
 /**

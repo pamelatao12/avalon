@@ -31,7 +31,7 @@ server.listen(port, () => {
     new Card(FIVE, HEART),
     new Card(TWO, HEART),
     new Card(TEN, HEART),
-    new Card(THREE, HEART)
+    new Card(TEN, HEART)
   ]);
 });
 
