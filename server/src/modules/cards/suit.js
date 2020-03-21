@@ -4,11 +4,11 @@ class Suit {
   }
 
   toString() {
-    return name;
+    return this.name;
   }
 
   toShortString() {
-    return name.index(0);
+    return this.name.charAt(0);
   }
 
   compareTo(other) {

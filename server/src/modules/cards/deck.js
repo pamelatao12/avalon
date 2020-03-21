@@ -1,6 +1,6 @@
-import { SUITS } from "./modules/cards/suit";
-import { VALUES } from "./modules/cards/value";
-import Card from "./modules/cards/card";
+import { SUITS } from "./suit";
+import { VALUES } from "./value";
+import Card from "./card";
 
 export default class Deck {
   constructor() {
@@ -8,9 +8,8 @@ export default class Deck {
   }
 
   reset() {
-    this.cards = [];
     this.nextCardIndex = 0;
-    this.initializeCards();
+    this.cards = this.initializeCards();
     this.shuffle();
   }
 
@@ -32,7 +31,7 @@ export default class Deck {
   shuffle() {
     // Move down the deck so random number logic is simpler.
     for (let i = this.cards.length - 1; i > 0; i--) {
-      const swapIndex = Math.random() * (i + 1);
+      const swapIndex = Math.floor(Math.random() * (i + 1));
       const tempCard = this.cards[i];
       this.cards[i] = this.cards[swapIndex];
       this.cards[swapIndex] = tempCard;
