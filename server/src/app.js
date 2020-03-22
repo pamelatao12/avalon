@@ -1,7 +1,9 @@
 import express from "express";
 import http from "http";
+import admin from 'firebase-admin';
 import socketIo from "socket.io";
 import routes from "./routes";
+import serviceAccount from ".env";
 
 const port = process.env.PORT || 4000;
 
@@ -9,6 +11,15 @@ const app = express();
 app.use(routes);
 
 const server = http.createServer(app);
+
+const serviceAccount = require("firebase-adminsdk.json");
+
+const firebase = admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://degen-poker.firebaseio.com"
+});
+
+const defaultAuth = admin.auth(firebase);
 
 const io = socketIo(server); // < Interesting!
 
