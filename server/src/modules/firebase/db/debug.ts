@@ -38,3 +38,11 @@ export const debugViewDatabase = (
     res.send({ response: value }).status(200);
   });
 };
+
+export const debugClearAll = (req: express.Request, res: express.Response) => {
+  // Use database root.
+  const table = db.ref();
+  table.set({}).then(() => {
+    res.send().status(204);
+  });
+};
