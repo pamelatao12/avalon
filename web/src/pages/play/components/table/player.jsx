@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "pages/play/components/table/player.css";
 import Card from "pages/play/components/table/card";
 
-const Player = ({ name, pic, position, cardSet }) => {
+const Player = ({ name, pic, position, cardSet, showHand }) => {
   const [cards, setCards] = useState([
     [cardSet[0][0], cardSet[0][1]],
     [cardSet[1][0], cardSet[1][1]]
@@ -15,6 +15,7 @@ const Player = ({ name, pic, position, cardSet }) => {
             key={i}
             number={cardSet[0][0] == "" ? "undef" : card[0]}
             suit={cardSet[0][0] == "" ? "undef" : card[1]}
+            show={showHand}
           />
         ))}
       </div>
