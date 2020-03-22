@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { FirebaseContext } from '../../firebase';
+import { FirebaseContext } from '../../common/firebase';
 import "./index.css";
 
 const SignedOutPage = (props) => {
@@ -22,6 +22,7 @@ const SignedOutPage = (props) => {
 
     try {
       await firebase.doSignInWithEmailAndPassword(email, password);
+      localStorage.setItem('logInStatus', true);
       history.push('/play');
     } catch(error) {
       alert(error);
