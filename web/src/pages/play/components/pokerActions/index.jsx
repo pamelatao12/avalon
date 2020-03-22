@@ -11,18 +11,24 @@ const PokerActions = () => {
   const [minBet, setMinBet] = useState(50);
 
   return (
-    <div className={styles.pokerActions}>
-      <div className="betBtns">
-        <Bets name="min" isMyTurn={isMyTurn} />
-        <Bets name="1/2 Pot" isMyTurn={isMyTurn} />
-        <Bets name="Pot" isMyTurn={isMyTurn} />
-        <Bets name="All in" isMyTurn={isMyTurn} />
-        <BetInput />
-      </div>
-      <div className="actionBtns">
-        <Button action="Fold" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-        <Button action="Call" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-        <Button action="Raise" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+    <div className={styles.pokerActionsContaier}>
+      <div className={styles.pokerActions}>
+        <div className="betBtns">
+          <Bets name="min" isMyTurn={isMyTurn} />
+          <Bets name="1/2 Pot" isMyTurn={isMyTurn} />
+          <Bets name="Pot" isMyTurn={isMyTurn} />
+          <Bets name="All in" isMyTurn={isMyTurn} />
+          <BetInput />
+        </div>
+        <div className="actionBtns">
+          <Button action="Fold" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <Button action="Call" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <Button
+            action="Raise"
+            isMyTurn={isMyTurn}
+            setIsMyTurn={setIsMyTurn}
+          />
+        </div>
       </div>
     </div>
   );
