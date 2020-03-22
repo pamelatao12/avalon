@@ -4,7 +4,7 @@ import {
   GetStateController as GetState
 } from "./ReadDatabaseController";
 import { setDatabase } from "./WriteDatabaseController";
-import { db } from "./";
+import database, { db } from "./";
 
 export const debugDatabase = () => {
   // TODO: delete later. testing read and write methods to firebase db
@@ -40,7 +40,7 @@ export const debugViewDatabase = (
 };
 
 export const debugClearAll = (req: express.Request, res: express.Response) => {
-  setDatabase(undefined, {}).then(() => {
+  database.clearAll().then(() => {
     res.send().status(204);
   });
 };
