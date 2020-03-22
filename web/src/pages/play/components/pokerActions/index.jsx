@@ -18,7 +18,7 @@ const PokerActions = () => {
   return (
     <div className={styles.pokerActionsContaier}>
       <div className={styles.pokerActions}>
-        <div className="betBtns">
+        <div className={styles.betBtns}>
           <Bets
             name="min"
             isMyTurn={isMyTurn}
@@ -55,7 +55,7 @@ const PokerActions = () => {
             allIn={allIn}
           />
         </div>
-        <div className="actionBtns">
+        <div className={styles.actionBtns}>
           <Button action="Fold" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
           <Button action="Call" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
           <Button

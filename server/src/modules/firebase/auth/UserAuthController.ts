@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin'
 
 const auth = admin.auth()
 
-export const authenticateUser = (idToken: string) => admin.auth().verifyIdToken(idToken)
+export const AuthenticateUserController = (idToken: string) => auth.verifyIdToken(idToken)
   .then(decodedToken => {
     let uid = decodedToken.uid
     // ...
@@ -11,8 +11,7 @@ export const authenticateUser = (idToken: string) => admin.auth().verifyIdToken(
     console.log('There was an issue with the request', err)
   })
 
-export const signUp = (email: string, pw: string) => {
-  auth.createUser({
+export const SignUpController = (email: string, pw: string) => auth.createUser({
     email: email,
     password: pw
   })
@@ -22,4 +21,3 @@ export const signUp = (email: string, pw: string) => {
   .catch(err => {
       console.log('Error creating new user:', err)
   })
-}

@@ -1,8 +1,21 @@
 import express from "express";
 import http from "http";
-import admin from "firebase-admin";
+import * as FirebaseAdmin from "firebase-admin";
 import socketIo from "socket.io";
-import routes from "./routes";
+import routes from "./modules/routes";
+import { determineHandValue } from "./modules/cards/hand";
+import Card from "./modules/cards/card";
+import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
+import { HEART } from "./modules/cards/suit";
+import {
+  AddEventListenerController as AddEventListener,
+  GetStateController as GetState
+} from "./modules/firebase/db/ReadDatabaseController";
+import {
+  UpdateDataController as UpdateData,
+  SetDataController as SetData,
+  PushDataController as PushData
+} from "./modules/firebase/db/WriteDatabaseController";
 
 const port = process.env.PORT || 4000;
 
@@ -13,12 +26,16 @@ const server = http.createServer(app);
 
 const serviceAccount = require("../firebase-adminsdk.json");
 
-const firebase = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+const admin = FirebaseAdmin.initializeApp({
+  credential: FirebaseAdmin.credential.cert(serviceAccount),
   databaseURL: "https://degen-poker.firebaseio.com"
 });
-
-const defaultAuth = admin.auth(firebase);
+export const db = admin.database();
+const table = db.ref("server");
+table.once("value", snapshot => {
+  console.log("current state: ", snapshot.val());
+});
+// const auth = admin.auth()
 
 const io = socketIo(server); // < Interesting!
 
@@ -30,6 +47,32 @@ let interval;
 
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);
+
+  // TODO: Remove debug stuff below.
+  determineHandValue([
+    new Card(ACE, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART)
+  ]);
+
+  // TODO: delete later. testing read and write methods to firebase db
+  const tableSetup = {
+    player_count: 6,
+    settings: {
+      small_blind: 0.2,
+      big_blind: 0.4,
+      buy_in_min: 10,
+      buy_in_max: 20
+    },
+    table_name: "degens at it again"
+  };
+  const tablePath = "server/poker/table";
+  AddEventListener("value", "server");
+  SetData(tableSetup, tablePath);
+  GetState("server/poker/table");
+  // console should log tableSetup
 });
 
 io.on("connection", socket => {
