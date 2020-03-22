@@ -13,7 +13,8 @@ const PokerTable = () => {
       20.0,
       2.0,
       [["2", "SPADE"], ["Q", "HEART"]],
-      true
+      true,
+      false
     ],
     [
       "Lance",
@@ -22,6 +23,7 @@ const PokerTable = () => {
       10.0,
       1.25,
       [["A", "CLUB"], ["6", "HEART"]],
+      true,
       true
     ],
     [
@@ -31,7 +33,8 @@ const PokerTable = () => {
       25.0,
       1.25,
       [["K", "DIAMOND"], ["8", "SPADE"]],
-      true
+      true,
+      false
     ],
     ["Joe", "./yay5.jpg", 5, 10.0, 1.25, [["J", "CLUB"], ["4", "CLUB"]], true],
     [
@@ -41,7 +44,8 @@ const PokerTable = () => {
       20.0,
       1.25,
       [["J", "SPADE"], ["A", "HEART"]],
-      true
+      true,
+      false
     ],
     [
       "Carmen",
@@ -50,7 +54,8 @@ const PokerTable = () => {
       20.0,
       1.25,
       [["9", "DIAMOND"], ["10", "DIAMOND"]],
-      true
+      true,
+      false
     ],
     [
       "Yaslin",
@@ -59,9 +64,10 @@ const PokerTable = () => {
       10.0,
       1.25,
       [["5", "HEART"], ["5", "CLUB"]],
-      true
+      true,
+      false
     ],
-    ["Earl", "./yay9.jpg", 9, 20.0, 0, [["", ""], ["", ""]], false]
+    ["Earl", "./yay9.jpg", 9, 20.0, 0, [["", ""], ["", ""]], false, false]
   ]);
 
   const tableAmount = 50.25;
@@ -79,6 +85,7 @@ const PokerTable = () => {
             bet={player[4]}
             cardSet={player[5]}
             showHand={player[6]}
+            myTurn={player[7]}
             key={i}
           />
         ))}
