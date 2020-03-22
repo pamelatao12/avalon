@@ -1,7 +1,8 @@
 import database from "../firebase/db";
+import { createTableSid } from "../sid";
 
 // TODO: Use a random string generator instead.
-const TABLE_ID = "1";
+const TABLE_ID = "2";
 
 const MAX_PLAYER_COUNT = 9;
 
@@ -87,7 +88,7 @@ export const createTable = async () => {
     settings: tableSettings
   };
 
-  const payload = { [TABLE_ID]: table };
+  const payload = { [createTableSid()]: table };
   await database.set("tables", payload);
   return payload;
 };
