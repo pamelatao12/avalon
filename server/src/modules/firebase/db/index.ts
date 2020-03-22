@@ -14,8 +14,3 @@ if (!isInitialized) {
 }
 
 export const db = firebaseAdmin.database();
-
-const table = db.ref("server");
-table.once("value", snapshot => {
-  console.log("current state: ", snapshot.val());
-});
