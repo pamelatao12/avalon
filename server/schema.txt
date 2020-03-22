@@ -2,7 +2,7 @@ users
     - id: string (firebase uid)
     - displayName: string (from firebase)
 
-games
+tables
     - id: {
       - seats: {
          -seat(1-9): seat id

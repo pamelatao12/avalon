@@ -1,6 +1,7 @@
 import express from "express";
 import { debugHand } from "../cards/debug";
 import { debugClearAll, debugViewDatabase } from "../firebase/db/debug";
+import { debugCreateTable } from "../table/debug";
 
 const router = express.Router();
 
@@ -15,5 +16,10 @@ router.get("/debug/hands", (req, res) => {
 router.get("/debug/db", debugViewDatabase);
 
 router.get("/debug/db/delete", debugClearAll);
+
+/**
+ * Table debug endpoints.
+ */
+router.get("/debug/table/create", debugCreateTable);
 
 export default router;
