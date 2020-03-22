@@ -8,9 +8,17 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/play" component={PlayPage} />
-        <Route exact path="/poker-actions" component={PokerActions} />
-        <Route path="*" component={SignedOutPage} />
+        <Route exact path="/play">
+          <PlayPage />
+        </Route>
+
+        <Route exact path="/poker-actions">
+          <PokerActions />
+        </Route>
+        
+        <Route path="*">
+          <SignedOutPage />
+        </Route>
       </Switch>
     </Router>
   );
