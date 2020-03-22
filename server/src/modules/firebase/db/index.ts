@@ -24,6 +24,16 @@ const set = (path: string, payload: any): Promise<void> => {
 };
 
 /**
+ * Pushes data to the path as part of a list.
+ */
+const push = async (path: string, payload: any): Promise<string> => {
+  const ref = db.ref(path).push();
+  await ref.set(payload);
+  // Get the unique key for the payload.
+  return ref.key || "";
+};
+
+/**
  * Reads a static snapshot of the contents at the given database path, as they
  * existed at the time of the read event. If the path is undefined, the root
  * will be used.
@@ -43,6 +53,7 @@ const clearAll = (): Promise<void> => {
 
 export default {
   set,
+  push,
   read,
   clearAll
 };
