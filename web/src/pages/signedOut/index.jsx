@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { FirebaseContext } from '../../firebase';
 import "./index.css";
 
 const SignedOutPage = (props) => {
   const [input, setInput] = useState({});
   const firebase = useContext(FirebaseContext);
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     setInput({
@@ -13,14 +15,17 @@ const SignedOutPage = (props) => {
     });
   }
 
-  const handleSubmit = (e) => {
-    const { email, password } = input;
-    
-    firebase.doSignInWithEmailAndPassword(email, password).catch(function(error) {
-      alert(error);
-    });
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, password } = input;
+
+    try {
+      await firebase.doSignInWithEmailAndPassword(email, password);
+      history.push('/play');
+    } catch(error) {
+      alert(error);
+    }
   }
 
   return (

@@ -13,8 +13,8 @@ const Player = ({ name, pic, position, cardSet, showHand }) => {
         {cards.map((card, i) => (
           <Card
             key={i}
-            number={cardSet[0][0] == "" ? "undef" : card[0]}
-            suit={cardSet[0][0] == "" ? "undef" : card[1]}
+            number={cardSet[0][0] === "" ? "undef" : card[0]}
+            suit={cardSet[0][0] === "" ? "undef" : card[1]}
             show={showHand}
           />
         ))}
