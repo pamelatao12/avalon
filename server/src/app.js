@@ -2,11 +2,7 @@ import express from "express";
 import http from "http";
 import * as FirebaseAdmin from "firebase-admin";
 import socketIo from "socket.io";
-import router from "modules/router";
-import { determineHandValue } from "./modules/cards/hand";
-import Card from "./modules/cards/card";
-import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
-import { HEART } from "./modules/cards/suit";
+import router from "./modules/router";
 import {
   AddEventListenerController as AddEventListener,
   GetStateController as GetState
@@ -47,15 +43,6 @@ let interval;
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
-
-  // TODO: Remove debug stuff below.
-  determineHandValue([
-    new Card(ACE, HEART),
-    new Card(TEN, HEART),
-    new Card(TEN, HEART),
-    new Card(TEN, HEART),
-    new Card(TEN, HEART)
-  ]);
 
   // TODO: delete later. testing read and write methods to firebase db
   const tableSetup = {
