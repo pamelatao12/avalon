@@ -1,4 +1,4 @@
-import { db } from '../../../app'
+import { db } from 'src/app'
 
 // const rootRefPath = 'server/poker'
 // const rootRef = db.ref(rootRefPath)
