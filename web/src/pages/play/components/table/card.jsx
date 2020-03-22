@@ -12,25 +12,25 @@ const Card = ({ number, suit, show }) => {
   return (
     <div
       className={classNames(
-        number == "undef"
+        number === "undef"
           ? "emptyCard"
-          : show == true
+          : show === true
           ? "openHand"
           : "closeHand"
       )}
     >
       <p
         className={classNames(
-          show == true ? "cardNum" : "emptyCardSuit",
-          suit == "HEART" || suit == "DIAMOND" ? "redCardNum" : "blackCardNum"
+          show === true ? "cardNum" : "emptyCardSuit",
+          suit === "HEART" || suit === "DIAMOND" ? "redCardNum" : "blackCardNum"
         )}
       >
         {number}
       </p>
       <p
         className={classNames(
-          show == true ? "cardSuit" : "emptyCardSuit",
-          suit == "HEART" || suit == "DIAMOND" ? "redCardNum" : "blackCardNum"
+          show === true ? "cardSuit" : "emptyCardSuit",
+          suit === "HEART" || suit === "DIAMOND" ? "redCardNum" : "blackCardNum"
         )}
       >
         {String.fromCharCode(suitKey[suit])}
