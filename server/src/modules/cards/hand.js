@@ -20,6 +20,8 @@ export const determineHandValue = cards => {
   // Mapping of values/suits to list of cards corresponding to them.
   const [values, suits] = countValuesAndSuits(cards);
 
+  const straightFlushValue = determineStraightFlushValue(suits);
+
   const quadsValue = determineQuadsValue(values);
 
   const flushValue = determineFlushValue(suits);
@@ -54,6 +56,28 @@ const countValuesAndSuits = cards => {
   // Add ACE on the low end to facilitate straight computation.
   values[1] = values[ACE.value];
   return [values, suits];
+};
+
+/**
+ * Returns a value of the form "08 00 00 00 00 xx" without spaces, or the empty
+ * string if there is no straight flush.
+ */
+const determineStraightFlushValue = suits => {
+  for (const suit of SUITS) {
+    const cards = suits[suit];
+    if (cards.length >= 5) {
+      const values = countValuesAndSuits(cards)[0];
+      const straightValue = determineStraightValue(values);
+      if (!straightValue) {
+        return "";
+      }
+
+      straightValue[1] = "8";
+      return straightValue;
+    }
+  }
+
+  return "";
 };
 
 /**

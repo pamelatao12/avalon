@@ -14,11 +14,11 @@ const PokerActions = () => {
     <div className={styles.pokerActionsContaier}>
       <div className={styles.pokerActions}>
         <div className="betBtns">
-          <Bets name="min" isMyTurn={isMyTurn} />
-          <Bets name="1/2 Pot" isMyTurn={isMyTurn} />
-          <Bets name="Pot" isMyTurn={isMyTurn} />
-          <Bets name="All in" isMyTurn={isMyTurn} />
-          <BetInput />
+          <Bets name="min" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <Bets name="1/2 Pot" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <Bets name="Pot" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <Bets name="All in" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
+          <BetInput isMyTurn={isMyTurn} />
         </div>
         <div className="actionBtns">
           <Button action="Fold" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
