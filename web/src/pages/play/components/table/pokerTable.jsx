@@ -5,7 +5,19 @@ import Player from "pages/play/components/table/player";
 
 const PokerTable = () => {
   const [players, setPlayers] = useState([
-    ["Pamela", "./yay.jpg", 1, 20.55, 0.0, [["", ""], ["", ""]], false],
+    [
+      "Pamela",
+      "./yay.jpg",
+      1,
+      20.55,
+      0.0,
+      [["A", "HEART"], ["A", "HEART"]],
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
     [
       "David",
       "./yay2.jpg",
@@ -14,6 +26,9 @@ const PokerTable = () => {
       2.0,
       [["2", "SPADE"], ["Q", "HEART"]],
       true,
+      false,
+      true,
+      false,
       false
     ],
     [
@@ -24,7 +39,10 @@ const PokerTable = () => {
       1.25,
       [["A", "CLUB"], ["6", "HEART"]],
       true,
-      true
+      true,
+      false,
+      true,
+      false
     ],
     [
       "Peter",
@@ -34,9 +52,24 @@ const PokerTable = () => {
       1.25,
       [["K", "DIAMOND"], ["8", "SPADE"]],
       true,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      "Joe",
+      "./yay5.jpg",
+      5,
+      10.0,
+      1.25,
+      [["J", "CLUB"], ["4", "CLUB"]],
+      true,
+      false,
+      false,
+      false,
       false
     ],
-    ["Joe", "./yay5.jpg", 5, 10.0, 1.25, [["J", "CLUB"], ["4", "CLUB"]], true],
     [
       "Anthony",
       "./yay6.jpg",
@@ -45,6 +78,9 @@ const PokerTable = () => {
       1.25,
       [["J", "SPADE"], ["A", "HEART"]],
       true,
+      false,
+      false,
+      false,
       false
     ],
     [
@@ -55,6 +91,9 @@ const PokerTable = () => {
       1.25,
       [["9", "DIAMOND"], ["10", "DIAMOND"]],
       true,
+      false,
+      false,
+      false,
       false
     ],
     [
@@ -65,9 +104,24 @@ const PokerTable = () => {
       1.25,
       [["5", "HEART"], ["5", "CLUB"]],
       true,
+      false,
+      false,
+      false,
       false
     ],
-    ["Earl", "./yay9.jpg", 9, 20.0, 0, [["", ""], ["", ""]], false, false]
+    [
+      "Earl",
+      "./yay9.jpg",
+      9,
+      20.0,
+      0,
+      [["", ""], ["", ""]],
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
   ]);
 
   const tableAmount = 50.25;
@@ -86,6 +140,9 @@ const PokerTable = () => {
             cardSet={player[5]}
             showHand={player[6]}
             myTurn={player[7]}
+            isDealer={player[8]}
+            isSmallBlind={player[9]}
+            isBigBlind={player[10]}
             key={i}
           />
         ))}

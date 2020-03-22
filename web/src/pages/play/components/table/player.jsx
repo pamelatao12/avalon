@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "pages/play/components/table/player.module.css";
 import Card from "pages/play/components/table/card";
+import classNames from "classnames";
 
 const Player = ({
   name,
@@ -10,7 +11,10 @@ const Player = ({
   bet,
   cardSet,
   showHand,
-  myTurn
+  myTurn,
+  isDealer,
+  isSmallBlind,
+  isBigBlind
 }) => {
   const [cards, setCards] = useState([
     [cardSet[0][0], cardSet[0][1]],
@@ -21,9 +25,26 @@ const Player = ({
 
   return (
     <div className={styles["playerProfile" + position]}>
+      <div
+        className={classNames(
+          isDealer
+            ? styles.dealerChip
+            : isSmallBlind
+            ? styles.sBChip
+            : isBigBlind
+            ? styles.bBChip
+            : styles.noChip,
+          isDealer || isSmallBlind || isBigBlind
+            ? styles["hasChip" + position]
+            : styles.noChip
+        )}
+      >
+        {isDealer ? "D" : isSmallBlind ? "SB" : isBigBlind ? "BB" : ""}
+      </div>
       <div className={styles["playerBet" + position]} style={style}>
         <span>&#10050;</span>${bet}
       </div>
+
       <div className={styles["playerCards" + position]}>
         {cards.map((card, i) => (
           <Card
