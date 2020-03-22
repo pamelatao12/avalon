@@ -20,7 +20,7 @@ export const AddEventListenerController = (eventType: EventType, path: string): 
     return newState
   }, (errorObject: any) => {
     console.log('The read failed: ', errorObject.code)
-  }) 
+  })
 }
 
 // once() reads and returns state when called
@@ -34,7 +34,7 @@ export const GetStateController = (path: string = 'server/poker'): object => {
 }
 
 // example controller we may need to make
-type PlayerActionType = 'check' | 'fold' | 'bet' | 'raise' 
+type PlayerActionType = 'check' | 'fold' | 'bet' | 'raise'
 interface PlayerAction {
   actionType: PlayerActionType,
   player: string,

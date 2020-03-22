@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "pages/play/components/table/tableCards.css";
+import styles from "pages/play/components/table/tableCards.module.css";
 import Card from "pages/play/components/table/card";
 
 const TableCards = () => {
@@ -18,7 +18,7 @@ const TableCards = () => {
   ]);
 
   return (
-    <div className="cardSet">
+    <div className={styles.cardSet}>
       <Card key={burn} number="" suit="" showHand={false} />
       {cards.map((card, i) => (
         <Card key={i} number={card[0]} suit={card[1]} />
