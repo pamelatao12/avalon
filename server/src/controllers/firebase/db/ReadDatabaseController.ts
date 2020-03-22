@@ -1,9 +1,5 @@
 import { db } from '../../../app'
 
-// const rootRefPath = 'server/poker'
-// const rootRef = db.ref(rootRefPath)
-// const table = rootRef.child('table')
-
 // ref.on takes in a callback that is triggered once with initial state and again every time the data changes (not 100% sure if that includes when changes happen outside of reference tree)
 // the callback is passed a snapshot containing all the data from that reference node, including all descendants
 // one use case for this api is to determine subsequent actions to be taken after a transaction (action/move) in the db has resolved
