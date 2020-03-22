@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import FirebaseAdmin from 'firebase-admin';
+import * as FirebaseAdmin from 'firebase-admin';
 import socketIo from "socket.io";
 import routes from "./routes";
 import { determineHandValue } from "./modules/cards/hand";
@@ -9,13 +9,14 @@ import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
 import { HEART } from "./modules/cards/suit";
 import { 
   AddEventListenerController as AddEventListener,
-  ReadOnceController as ReadOnce 
-} from "./controllers/firebase/db/ReadDatabaseController"
+  GetStateController as GetState 
+} from "./controllers/firebase/db/ReadDatabaseController.ts"
 import {
   UpdateDataController as UpdateData,
   SetDataController as SetData,
   PushDataController as PushData 
 } from "./controllers/firebase/db/WriteDatabaseController"
+
 
 const port = process.env.PORT || 4000;
 
@@ -30,15 +31,14 @@ const admin = FirebaseAdmin.initializeApp({
   credential: FirebaseAdmin.credential.cert(serviceAccount),
   databaseURL: "https://degen-poker.firebaseio.com"
 })
-/* basic example on accessing adminSDK auth and realtime db api */
-// 
+export const db = admin.database()
+const table = db.ref("server")
+table.once("value", snapshot => {
+  console.log("current state: ", snapshot.val())
+})
 // const auth = admin.auth()
-//
-// const db = admin.database()
-// const table = db.ref("server/poker/table")
-// ref.once("value", snapshot => {
-//   console.log(snapshot.val())
-// })
+
+
 
 const io = socketIo(server); // < Interesting!
 
@@ -60,7 +60,8 @@ server.listen(port, () => {
     new Card(TEN, HEART)
   ]);
 
-  // TODO: delete later. checking read and write methods to firebase db
+  
+  // TODO: delete later. testing read and write methods to firebase db
   const tableSetup = {
     "player_count": 6,
     "settings": {
@@ -72,8 +73,9 @@ server.listen(port, () => {
     "table_name": "degens at it again"
   }
   const tablePath = 'server/poker/table'
+  AddEventListener("value", 'server')
   SetData(tableSetup, tablePath)
-  ReadOnce('server/poker/table')
+  GetState('server/poker/table')
   // console should log tableSetup 
 });
 
