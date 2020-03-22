@@ -3,7 +3,7 @@ import {
   AddEventListenerController as AddEventListener,
   GetStateController as GetState
 } from "./ReadDatabaseController";
-import { SetDataController as SetData } from "./WriteDatabaseController";
+import { setDatabase } from "./WriteDatabaseController";
 import { db } from "./";
 
 export const debugDatabase = () => {
@@ -20,7 +20,7 @@ export const debugDatabase = () => {
   };
   const tablePath = "server/poker/table";
   AddEventListener("value", "server");
-  SetData(tableSetup, tablePath);
+  setDatabase(tablePath, tableSetup);
   GetState("server/poker/table");
   // console should log tableSetup
 };
@@ -32,17 +32,15 @@ export const debugViewDatabase = (
   req: express.Request,
   res: express.Response
 ) => {
-  const table = db.ref("server");
+  const table = db.ref();
   table.once("value", snapshot => {
     const value = snapshot.val();
-    res.send({ response: value }).status(200);
+    res.send(value).status(200);
   });
 };
 
 export const debugClearAll = (req: express.Request, res: express.Response) => {
-  // Use database root.
-  const table = db.ref();
-  table.set({}).then(() => {
+  setDatabase(undefined, {}).then(() => {
     res.send().status(204);
   });
 };
