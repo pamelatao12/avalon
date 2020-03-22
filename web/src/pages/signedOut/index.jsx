@@ -31,18 +31,18 @@ const SignedOutPage = (props) => {
   return (
     <div className="sign-in">
       <form className="form" onSubmit={handleSubmit}>
-        <div>Sign In</div>
-        <div className="email">
+        <div className="header">Sign In</div>
+        <div className="input">
           <label>Email:</label>
-          <input type="text" name="email" onChange={handleInputChange} />
+          <input className="textbox" type="text" name="email" onChange={handleInputChange} />
         </div>
 
-        <div className="password">
+        <div className="input">
           <label>Password:</label>
-          <input type="text" name="password" onChange={handleInputChange} />
+          <input className="textbox" type="text" name="password" onChange={handleInputChange} />
         </div>
   
-        <input type="submit" />
+        <input className="button" type="submit" />
       </form>
     </div>
   );
