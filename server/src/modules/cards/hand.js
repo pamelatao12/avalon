@@ -20,21 +20,18 @@ export const determineHandValue = cards => {
   // Mapping of values/suits to list of cards corresponding to them.
   const [values, suits] = countValuesAndSuits(cards);
 
-  const straightFlushValue = determineStraightFlushValue(suits);
-
-  const quadsValue = determineQuadsValue(values);
-
-  const flushValue = determineFlushValue(suits);
-
-  const straightValue = determineStraightValue(values);
-
-  const tripsValue = determineTripsValue(values);
-
-  const twoPairValue = determineTwoPairValue(values);
-
-  const onePairValue = determineOnePairValue(values);
-
-  const highCardValue = determineHighCardValue(values);
+  return (
+    determineStraightFlushValue(suits) ||
+    determineQuadsValue(values) ||
+    determineFullHouseValue(values) ||
+    determineFlushValue(suits) ||
+    determineStraightValue(values) ||
+    determineTripsValue(values) ||
+    determineTwoPairValue(values) ||
+    determineOnePairValue(values) ||
+    determineHighCardValue(values) ||
+    ""
+  );
 };
 
 const countValuesAndSuits = cards => {
@@ -72,8 +69,7 @@ const determineStraightFlushValue = suits => {
         return "";
       }
 
-      straightValue[1] = "8";
-      return straightValue;
+      return straightValue.charAt(0) + "8" + straightValue.substring(2);
     }
   }
 
@@ -108,6 +104,39 @@ const determineQuadsValue = values => {
 };
 
 /**
+ * Returns a value of the form "06 00 00 00 T1 P1" without spaces, or the empty
+ * string if there is no full house.
+ */
+const determineFullHouseValue = values => {
+  let tripsValue;
+  let pairValue;
+
+  for (const value of VALUES_DESC) {
+    if (!tripsValue && values[value.value].length === 3) {
+      tripsValue = value;
+
+      if (pairValue) {
+        break;
+      }
+    } else if (!pairValue && values[value.value].length === 2) {
+      pairValue = value;
+
+      if (tripsValue) {
+        break;
+      }
+    }
+  }
+
+  if (!tripsValue || !pairValue) {
+    return "";
+  }
+
+  return (
+    "06000000" + tripsValue.getValueAsString() + pairValue.getValueAsString()
+  );
+};
+
+/**
  * Returns a value of the form "05 xx xx xx xx xx" without spaces, or the empty
  * string if there is no flush.
  */
@@ -134,7 +163,25 @@ const determineFlushValue = suits => {
  * string if there is no straight.
  */
 const determineStraightValue = values => {
-  // TODO: Compute some value based on highest card in straight.
+  // Add ace since straights can wrap from A-5.
+  const descValues = [...VALUES_DESC, ACE];
+
+  for (let i = 0; i < descValues.length; i++) {
+    let count = 0;
+
+    for (let j = i; j < i + 5 && j < descValues.length; j++) {
+      const value = descValues[j].value;
+
+      if (values[value].length === 0) {
+        break;
+      }
+
+      if (++count === 5) {
+        return "0400000000" + descValues[i].getValueAsString();
+      }
+    }
+  }
+
   return "";
 };
 

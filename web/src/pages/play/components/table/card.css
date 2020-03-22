@@ -1,4 +1,22 @@
-.card {
+/* .card {
+  height: 50px;
+  width: 40px;
+  border-radius: 6px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: white;
+  border: 2px solid black;
+} */
+
+.emptyCard {
+  border: 2px dotted blue;
+  height: 50px;
+  width: 40px;
+  border-radius: 6px;
+  background-image: none;
+}
+
+.openHand {
   height: 50px;
   width: 40px;
   border-radius: 6px;
@@ -8,11 +26,15 @@
   border: 2px solid black;
 }
 
-.emptyCard {
-  border: 2px dotted blue;
+.closeHand {
   height: 50px;
   width: 40px;
   border-radius: 6px;
+  background-size: contain;
+  background-color: white;
+  background-repeat: no-repeat;
+  border: 2px solid black;
+  background-image: url(/back.png);
 }
 
 .emptyCardSuit {

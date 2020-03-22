@@ -19,7 +19,7 @@ const TableCards = () => {
 
   return (
     <div className="cardSet">
-      <Card key={burn} number="back" suit="back" />
+      <Card key={burn} number="" suit="" showHand={false} />
       {cards.map((card, i) => (
         <Card key={i} number={card[0]} suit={card[1]} />
       ))}
