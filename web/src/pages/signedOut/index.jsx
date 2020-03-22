@@ -40,7 +40,7 @@ const SignedOutPage = (props) => {
 
         <div className="input">
           <label>Password:</label>
-          <input className="textbox" type="text" name="password" onChange={handleInputChange} />
+          <input className="textbox" type="password" name="password" onChange={handleInputChange} />
         </div>
   
         <input className="button" type="submit" />
