@@ -15,7 +15,7 @@ app.use(routes);
 
 const server = http.createServer(app);
 
-const serviceAccount = require("firebase-adminsdk.json");
+const serviceAccount = require("../firebase-adminsdk.json");
 
 const firebase = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
