@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import * as FirebaseAdmin from "firebase-admin";
 import socketIo from "socket.io";
-import routes from "./modules/routes";
+import router from "modules/router";
 import { determineHandValue } from "./modules/cards/hand";
 import Card from "./modules/cards/card";
 import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
@@ -16,11 +16,11 @@ import {
   SetDataController as SetData,
   PushDataController as PushData
 } from "./modules/firebase/db/WriteDatabaseController";
+import { PORT } from "./config";
 
-const port = process.env.PORT || 4000;
-
+// Set up app with our own router.
 const app = express();
-app.use(routes);
+app.use(router);
 
 const server = http.createServer(app);
 
@@ -45,8 +45,8 @@ const getApiAndEmit = async socket => {
 
 let interval;
 
-server.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 
   // TODO: Remove debug stuff below.
   determineHandValue([
