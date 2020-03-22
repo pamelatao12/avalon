@@ -104,11 +104,20 @@
   border-radius: 10px;
   padding: 8px;
   display: flex;
+  min-width: 120px;
 }
 
 .playerDetails {
-  align-self: center;
+  /* align-self: center; */
+  margin-top: 6px;
   padding-left: 10px;
+  padding-right: 3px;
+}
+
+.playerTotalMoney {
+  margin-top: 2px;
+  padding-left: 10px;
+  font-weight: bolder;
 }
 
 .circleCrop {

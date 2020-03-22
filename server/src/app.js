@@ -1,12 +1,8 @@
 import express from "express";
 import http from "http";
-import admin from 'firebase-admin';
+import admin from "firebase-admin";
 import socketIo from "socket.io";
 import routes from "./routes";
-import { determineHandValue } from "./modules/cards/hand";
-import Card from "./modules/cards/card";
-import { ACE, FIVE, FOUR, THREE, TWO } from "./modules/cards/value";
-import { HEART, DIAMOND } from "./modules/cards/suit";
 
 const port = process.env.PORT || 4000;
 
@@ -34,15 +30,6 @@ let interval;
 
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);
-
-  // TODO: Remove debug stuff below.
-  determineHandValue([
-    new Card(ACE, HEART),
-    new Card(TWO, HEART),
-    new Card(THREE, DIAMOND),
-    new Card(FOUR, HEART),
-    new Card(FIVE, HEART)
-  ]);
 });
 
 io.on("connection", socket => {
