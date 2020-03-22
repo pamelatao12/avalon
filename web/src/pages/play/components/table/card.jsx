@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import "pages/play/components/table/card.css";
 
-const Card = ({ number, suit }) => {
+const Card = ({ number, suit, show }) => {
   const suitKey = {
     SPADE: 9824,
     HEART: 9829,
@@ -11,12 +11,17 @@ const Card = ({ number, suit }) => {
   };
   return (
     <div
-      className={number == "undef" ? "emptyCard" : "card"}
-      style={{ backgroundImage: `url("/${number}${suit}.png")` }}
+      className={classNames(
+        number == "undef"
+          ? "emptyCard"
+          : show == true
+          ? "openHand"
+          : "closeHand"
+      )}
     >
       <p
         className={classNames(
-          number == "undef" ? "emptyCardSuit" : "cardNum",
+          show == true ? "cardNum" : "emptyCardSuit",
           suit == "HEART" || suit == "DIAMOND" ? "redCardNum" : "blackCardNum"
         )}
       >
@@ -24,7 +29,7 @@ const Card = ({ number, suit }) => {
       </p>
       <p
         className={classNames(
-          number == "undef" ? "emptyCardSuit" : "cardSuit",
+          show == true ? "cardSuit" : "emptyCardSuit",
           suit == "HEART" || suit == "DIAMOND" ? "redCardNum" : "blackCardNum"
         )}
       >
