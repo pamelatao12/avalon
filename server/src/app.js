@@ -3,15 +3,6 @@ import http from "http";
 import * as FirebaseAdmin from "firebase-admin";
 import socketIo from "socket.io";
 import router from "./modules/router";
-import {
-  AddEventListenerController as AddEventListener,
-  GetStateController as GetState
-} from "./modules/firebase/db/ReadDatabaseController";
-import {
-  UpdateDataController as UpdateData,
-  SetDataController as SetData,
-  PushDataController as PushData
-} from "./modules/firebase/db/WriteDatabaseController";
 import { PORT } from "./config";
 
 // Set up app with our own router.
@@ -41,26 +32,7 @@ const getApiAndEmit = async socket => {
 
 let interval;
 
-server.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-
-  // TODO: delete later. testing read and write methods to firebase db
-  const tableSetup = {
-    player_count: 6,
-    settings: {
-      small_blind: 0.2,
-      big_blind: 0.4,
-      buy_in_min: 10,
-      buy_in_max: 20
-    },
-    table_name: "degens at it again"
-  };
-  const tablePath = "server/poker/table";
-  AddEventListener("value", "server");
-  SetData(tableSetup, tablePath);
-  GetState("server/poker/table");
-  // console should log tableSetup
-});
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 io.on("connection", socket => {
   console.log("New client connected");
