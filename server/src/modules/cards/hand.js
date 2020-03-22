@@ -72,8 +72,7 @@ const determineStraightFlushValue = suits => {
         return "";
       }
 
-      straightValue[1] = "8";
-      return straightValue;
+      return straightValue.charAt(0) + "8" + straightValue.substring(2);
     }
   }
 
@@ -134,7 +133,25 @@ const determineFlushValue = suits => {
  * string if there is no straight.
  */
 const determineStraightValue = values => {
-  // TODO: Compute some value based on highest card in straight.
+  // Add ace since straights can wrap from A-5.
+  const descValues = [...VALUES_DESC, ACE];
+
+  for (let i = 0; i < descValues.length; i++) {
+    let count = 0;
+
+    for (let j = i; j < i + 5 && j < descValues.length; j++) {
+      const value = descValues[j].value;
+
+      if (values[value].length === 0) {
+        break;
+      }
+
+      if (++count === 5) {
+        return "0400000000" + descValues[i].getValueAsString();
+      }
+    }
+  }
+
   return "";
 };
 
