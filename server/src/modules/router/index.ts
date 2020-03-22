@@ -2,6 +2,7 @@ import express from "express";
 import { debugHand } from "../cards/debug";
 import { debugClearAll, debugViewDatabase } from "../firebase/db/debug";
 import { debugCreateTable, debugGetTable } from "../table/debug";
+import { debugSitAtTAble } from "../player/debug";
 
 const router = express.Router();
 
@@ -22,5 +23,10 @@ router.get("/debug/db/clear", debugClearAll);
  */
 router.get("/debug/table/create", debugCreateTable);
 router.get("/debug/table", debugGetTable);
+
+/**
+ * Player debug endpoints.
+ */
+router.get("/debug/player/sitAtTable", debugSitAtTAble);
 
 export default router;

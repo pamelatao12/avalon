@@ -1,8 +1,4 @@
 import database from "../firebase/db";
-import { createTableSid } from "../sid";
-
-// TODO: Use a random string generator instead.
-const TABLE_ID = "2";
 
 const MAX_PLAYER_COUNT = 9;
 
