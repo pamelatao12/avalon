@@ -32,10 +32,10 @@ export const debugViewDatabase = (
   req: express.Request,
   res: express.Response
 ) => {
-  const table = db.ref("server");
+  const table = db.ref();
   table.once("value", snapshot => {
     const value = snapshot.val();
-    res.send({ response: value }).status(200);
+    res.send(value).status(200);
   });
 };
 

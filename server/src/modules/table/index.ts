@@ -22,8 +22,39 @@ type Players = {
   [key in PlayerKeys]: Player | null;
 };
 
-type Table = {
+type BetSizes = {
   currentBetSize: number;
+  minBet: number;
+  halfPot: number;
+  pot: number;
+};
+
+enum Turn {
+  PREFLOP = "preflop",
+  FLOP = "flop",
+  TURN = "turn",
+  RIVER = "river"
+}
+
+type Board = {
+  flopCard1: string | null;
+  flopCard2: string | null;
+  flopCard3: string | null;
+  turnCard: string | null;
+  riverCard: string | null;
+  turn: Turn;
+};
+
+type Game = {
+  betSizes: BetSizes;
+  potSize: number;
+  // Player number whose turn it is.
+  whoseTurn: number;
+  board: Board;
+};
+
+type Table = {
+  game: Game | null;
   hasStarted: boolean;
   settings: TableSettings;
   players: Players;
@@ -37,7 +68,7 @@ export const createTable = async () => {
   };
 
   const table: Table = {
-    currentBetSize: 0,
+    game: null,
     hasStarted: false,
     players: {
       1: null,
