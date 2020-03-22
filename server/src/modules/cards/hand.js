@@ -1,85 +1,257 @@
 /**
  * Returns a deterministic value for an array of cards. This value can then
  * be used to determine whether one set of cards has a higher value over
- * another.
+ * another. The value is a string as described below, without the spaces.
  *
- * - straight flush:
- * - quads:
- * - full house:
- * - flush:
- * - straight:
- * - trips:
- * - two pair:
- * - pair:
- * - high card:
+ * - straight flush:   08 00 00 00 00 xx
+ * - quads:            07 00 00 00 Q1 xx
+ * - full house:       06 00 00 00 T1 P1
+ * - flush:            05 xx xx xx xx xx
+ * - straight:         04 00 00 00 00 xx
+ * - trips:            03 00 00 T1 xx xx
+ * - two pair:         02 00 00 P1 P2 xx
+ * - one pair:         01 00 P1 xx xx xx
+ * - high card:        00 xx xx xx xx xx
  */
 import { SUITS } from "./suit";
-import { ACE } from "./value";
+import { ACE, VALUES, VALUES_DESC } from "./value";
 
 export const determineHandValue = cards => {
-  // Mapping of values/suits to number of occurrences.
-  const [valueCounts, suitCounts] = countValuesAndSuits(cards);
+  // Mapping of values/suits to list of cards corresponding to them.
+  const [values, suits] = countValuesAndSuits(cards);
 
-  const flushValue = determineFlushValue(cards, suitCounts);
+  const straightFlushValue = determineStraightFlushValue(suits);
 
-  const straightValue = determineStraightValue(cards, valueCounts);
+  const quadsValue = determineQuadsValue(values);
 
-  const tripsValue = determineTripsValue(cards, valueCounts);
+  const flushValue = determineFlushValue(suits);
 
-  const twoPairValue = determineTwoPairValue(cards, valueCounts);
+  const straightValue = determineStraightValue(values);
 
-  const pairValue = determinePairValue(cards, valueCounts);
+  const tripsValue = determineTripsValue(values);
 
-  const highCardValue = determineHighCardValue(cards, valueCounts);
+  const twoPairValue = determineTwoPairValue(values);
+
+  const onePairValue = determineOnePairValue(values);
+
+  const highCardValue = determineHighCardValue(values);
 };
 
 const countValuesAndSuits = cards => {
-  const valueCounts = {};
-  const suitCounts = {};
+  const values = {};
+  const suits = {};
+
+  // Initialize list with empty arrays to simplify adding values.
+  SUITS.forEach(suit => (suits[suit] = []));
+  VALUES.forEach(value => (values[value.value] = []));
 
   cards.forEach(card => {
     const value = card.value.value;
-    valueCounts[value] = getCount(valueCounts, value) + 1;
+    values[value].push(card);
 
     const suit = card.suit;
-    suitCounts[suit] = getCount(suitCounts, suit) + 1;
+    suits[suit].push(card);
   });
 
   // Add ACE on the low end to facilitate straight computation.
-  valueCounts[1] = valueCounts[ACE.value];
-  return [valueCounts, suitCounts];
+  values[1] = values[ACE.value];
+  return [values, suits];
 };
 
-const determineFlushValue = (cards, suitCounts) => {
+/**
+ * Returns a value of the form "08 00 00 00 00 xx" without spaces, or the empty
+ * string if there is no straight flush.
+ */
+const determineStraightFlushValue = suits => {
   for (const suit of SUITS) {
-    if (getCount(suitCounts, suit) >= 5) {
-      // TODO: Compute some value that takes into account all 5 cards.
+    const cards = suits[suit];
+    if (cards.length >= 5) {
+      const values = countValuesAndSuits(cards)[0];
+      const straightValue = determineStraightValue(values);
+      if (!straightValue) {
+        return "";
+      }
+
+      straightValue[1] = "8";
+      return straightValue;
     }
   }
 
-  return 0;
+  return "";
 };
 
-const determineStraightValue = (cards, valueCounts) => {
+/**
+ * Returns a value of the form "07 00 00 00 Q1 xx" without spaces, or the empty
+ * string if there is no quads.
+ */
+const determineQuadsValue = values => {
+  let quadValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 4) {
+      quadValue = value;
+      break;
+    }
+  }
+
+  if (!quadValue) {
+    return "";
+  }
+
+  let result = "07000000";
+  result += quadValue.getValueAsString();
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      result += value.getValueAsString();
+      return result;
+    }
+  }
+};
+
+/**
+ * Returns a value of the form "05 xx xx xx xx xx" without spaces, or the empty
+ * string if there is no flush.
+ */
+const determineFlushValue = suits => {
+  for (const suit of SUITS) {
+    const cards = suits[suit];
+    if (cards.length >= 5) {
+      // Sort in desc order.
+      cards.sort((a, b) => -1 * a.compareTo(b));
+
+      let result = "05";
+      for (let i = 0; i < 5; i++) {
+        result += cards[i].value.getValueAsString();
+      }
+      return result;
+    }
+  }
+
+  return "";
+};
+
+/**
+ * Returns a value of the form "04 00 00 00 00 xx" without spaces, or the empty
+ * string if there is no straight.
+ */
+const determineStraightValue = values => {
   // TODO: Compute some value based on highest card in straight.
+  return "";
 };
 
-const determineTripsValue = (cards, valueCounts) => {
-  // TODO: Compute some value based on trips value and top 2 cards after.
+/**
+ * Returns a value of the form "03 00 00 T1 xx xx" without spaces, or the empty
+ * string if there is no trips.
+ */
+const determineTripsValue = values => {
+  let tripsValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 3) {
+      tripsValue = value;
+      break;
+    }
+  }
+
+  if (!tripsValue) {
+    return "";
+  }
+
+  let result = "030000";
+  result += tripsValue.getValueAsString();
+  let count = 0;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      result += value.getValueAsString();
+
+      if (++count === 2) {
+        return result;
+      }
+    }
+  }
 };
 
-const determineTwoPairValue = (cards, valueCounts) => {
-  // TODO: Compute some value based on the 2 pairs and top card after.
+/**
+ * Returns a value of the form "02 00 00 P1 P2 xx" without spaces, or the empty
+ * string if there is no two pair.
+ */
+const determineTwoPairValue = values => {
+  let count = 0;
+  let pairOneValue;
+  let pairTwoValue;
+
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 2) {
+      if (count === 0) {
+        pairOneValue = value;
+        count++;
+      } else if (count === 1) {
+        pairTwoValue = value;
+        break;
+      }
+    }
+  }
+
+  if (!pairOneValue || !pairTwoValue) {
+    return "";
+  }
+
+  let result = "020000";
+  result += pairOneValue.getValueAsString();
+  result += pairTwoValue.getValueAsString();
+
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      result += value.getValueAsString();
+      return result;
+    }
+  }
 };
 
-const determinePairValue = (cards, valueCounts) => {
-  // TODO: Compute some value based on trips value and top 3 cards after.
+/**
+ * Returns a value of the form "01 00 P1 xx xx xx" without spaces, or the empty
+ * string if there is no one pair.
+ */
+const determineOnePairValue = values => {
+  let pairValue;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 2) {
+      pairValue = value;
+      break;
+    }
+  }
+
+  if (!pairValue) {
+    return "";
+  }
+
+  let result = "0100";
+  result += pairValue.getValueAsString();
+  let count = 0;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      result += value.getValueAsString();
+
+      if (++count === 3) {
+        return result;
+      }
+    }
+  }
 };
 
-const determineHighCardValue = (cards, valueCounts) => {
-  // TODO: Compute some value based on top 5 cards.
-};
+/**
+ * Returns a value of the form "00 xx xx xx xx xx" without spaces.
+ */
+const determineHighCardValue = values => {
+  let count = 0;
+  let result = "00";
 
-const getCount = (obj, value) => {
-  return obj[value] || 0;
+  for (const value of VALUES_DESC) {
+    if (values[value.value].length === 1) {
+      count++;
+      result += value.getValueAsString();
+
+      if (count === 5) {
+        return result;
+      }
+    }
+  }
 };

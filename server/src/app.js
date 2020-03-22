@@ -3,7 +3,10 @@ import http from "http";
 import admin from 'firebase-admin';
 import socketIo from "socket.io";
 import routes from "./routes";
-import serviceAccount from ".env";
+import { determineHandValue } from "./modules/cards/hand";
+import Card from "./modules/cards/card";
+import { ACE, FIVE, TEN, THREE, TWO } from "./modules/cards/value";
+import { HEART } from "./modules/cards/suit";
 
 const port = process.env.PORT || 4000;
 
@@ -29,7 +32,18 @@ const getApiAndEmit = async socket => {
 
 let interval;
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+
+  // TODO: Remove debug stuff below.
+  determineHandValue([
+    new Card(ACE, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART),
+    new Card(TEN, HEART)
+  ]);
+});
 
 io.on("connection", socket => {
   console.log("New client connected");

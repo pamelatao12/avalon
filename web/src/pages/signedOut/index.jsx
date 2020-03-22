@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { FirebaseContext } from '../../firebase';
 import "./index.css";
 
-// TODO: Lance.
-// 1) Add 2 inputs (email, password) and 1 button to log in.
-// 2) Authenticate with Firebase to see if user exists.
-// 3) If it exists, redirect to /play
-// 4) if it does not exist, show error.
-
-const SignedOutPage = () => {
+const SignedOutPage = (props) => {
   const [input, setInput] = useState({});
+  const firebase = useContext(FirebaseContext);
 
   const handleInputChange = (e) => {
     setInput({
@@ -17,13 +13,23 @@ const SignedOutPage = () => {
     });
   }
 
+  const handleSubmit = (e) => {
+    const { email, password } = input;
+    
+    firebase.doSignInWithEmailAndPassword(email, password).catch(function(error) {
+      alert(error);
+    });
+
+    e.preventDefault();
+  }
+
   return (
     <div className="sign-in">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div>Sign In</div>
-        <div className="username">
-          <label>Username:</label>
-          <input type="text" name="username" onChange={handleInputChange} />
+        <div className="email">
+          <label>Email:</label>
+          <input type="text" name="email" onChange={handleInputChange} />
         </div>
 
         <div className="password">

@@ -1,0 +1,27 @@
+.betInputContainer {
+  padding-left: 14px;
+  display: inline;
+}
+
+.betInput {
+  width: 125px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
+.betInput:focus {
+  border: 1px solid black;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] textarea,
+select {
+  outline: none;
+}
