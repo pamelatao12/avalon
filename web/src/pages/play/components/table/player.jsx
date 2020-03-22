@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "pages/play/components/table/player.css";
+import styles from "pages/play/components/table/player.module.css";
 import Card from "pages/play/components/table/card";
 
 const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
@@ -11,11 +11,11 @@ const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
   const style = cardSet[0][0] === "" ? { visibility: "hidden" } : {};
 
   return (
-    <div className={`playerProfile${position}`}>
-      <div className={`playerBet${position}`} style={style}>
+    <div className={styles["playerProfile" + position]}>
+      <div className={styles["playerBet" + position]} style={style}>
         <span>&#10050;</span>${bet}
       </div>
-      <div className={`playerCards${position}`}>
+      <div className={styles["playerCards" + position]}>
         {cards.map((card, i) => (
           <Card
             key={i}
@@ -25,11 +25,11 @@ const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
           />
         ))}
       </div>
-      <div className="playerDetailsWrapper">
-        <img className="circleCrop" src={pic} alt="user" />
-        <div className="playerNameMoneyWrapper">
-          <div className="playerDetails">{name}</div>
-          <div className="playerTotalMoney">${money}</div>
+      <div className={styles.playerDetailsWrapper}>
+        <img className={styles.circleCrop} src={pic} alt="user" />
+        <div className={styles.playerNameMoneyWrapper}>
+          <div className={styles.playerDetails}>{name}</div>
+          <div className={styles.playerTotalMoney}>${money}</div>
         </div>
       </div>
     </div>
