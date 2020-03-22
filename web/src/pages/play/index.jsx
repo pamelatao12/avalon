@@ -5,13 +5,13 @@ import PokerTable from "pages/play/components/table/pokerTable";
 import PokerActions from "pages/play/components/pokerActions";
 
 const PlayPage = () => {
-  const firebase = useContext(FirebaseContext);
-  const user = firebase.auth.currentUser;
+  // const firebase = useContext(FirebaseContext);
+  // const user = firebase.auth.currentUser;
 
-   if (!user) {
-     alert('Please log in plebeian');
-     return <Redirect to="/" />
-   }
+  //  if (!user) {
+  //    alert('Please log in plebeian');
+  //    return <Redirect to="/" />
+  //  }
 
   return (
     <div>
