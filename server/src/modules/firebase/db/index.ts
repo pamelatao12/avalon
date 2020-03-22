@@ -16,10 +16,9 @@ if (!isInitialized) {
 export const db = firebaseAdmin.database();
 
 /**
- * Write or replace data to a defined path, like messages/users/<username>. If
- * the path is undefined, the root will be used.
+ * Write or replace data to a defined path, like messages/users/<username>.
  */
-const set = (path: string | undefined, payload: any): Promise<void> => {
+const set = (path: string, payload: any): Promise<void> => {
   const ref = db.ref(path);
   return ref.set(payload);
 };
@@ -34,7 +33,16 @@ const read = (path: string | undefined): Promise<any> => {
   return ref.once("value", snapshot => snapshot.val());
 };
 
+/**
+ * Clears everything in the database. This should be used sparingly and carefully.
+ */
+const clearAll = (): Promise<void> => {
+  const ref = db.ref();
+  return ref.set(null);
+};
+
 export default {
   set,
-  read
+  read,
+  clearAll
 };
