@@ -2,7 +2,6 @@
   height: 42px;
   width: 60px;
   color: black;
-  border: solid black 1px;
   border-radius: 30px;
   background-color: rgb(247, 247, 247);
   margin: 6px;
@@ -12,6 +11,11 @@
 
 .amountBtn:hover {
   cursor: pointer;
+}
+
+.amountBtn:focus {
+  border: 2px solid green;
+  outline: none;
 }
 
 .disabled {

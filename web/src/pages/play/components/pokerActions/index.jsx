@@ -5,20 +5,55 @@ import Bets from "./bets";
 import BetInput from "./betInput";
 
 const PokerActions = () => {
-  //placeholder
+  //placeholder states
   const [isMyTurn, setIsMyTurn] = useState(true);
   const [position, setPosition] = useState("bigBlind");
   const [minBet, setMinBet] = useState(50);
+  const [halfPot, setHalfPot] = useState(100);
+  const [pot, setPot] = useState(200);
+  const [allIn, setAllIn] = useState(1000);
+  const [currentStack, setCurrentStack] = useState(1000);
+  const [currentBet, setCurrentBet] = useState(minBet);
 
   return (
     <div className={styles.pokerActionsContaier}>
       <div className={styles.pokerActions}>
         <div className="betBtns">
-          <Bets name="min" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-          <Bets name="1/2 Pot" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-          <Bets name="Pot" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-          <Bets name="All in" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
-          <BetInput isMyTurn={isMyTurn} />
+          <Bets
+            name="min"
+            isMyTurn={isMyTurn}
+            setIsMyTurn={setIsMyTurn}
+            amount={minBet}
+            setCurrentBet={setCurrentBet}
+          />
+          <Bets
+            name="1/2 Pot"
+            isMyTurn={isMyTurn}
+            setIsMyTurn={setIsMyTurn}
+            amount={halfPot}
+            setCurrentBet={setCurrentBet}
+          />
+          <Bets
+            name="Pot"
+            isMyTurn={isMyTurn}
+            setIsMyTurn={setIsMyTurn}
+            amount={pot}
+            setCurrentBet={setCurrentBet}
+          />
+          <Bets
+            name="All in"
+            isMyTurn={isMyTurn}
+            setIsMyTurn={setIsMyTurn}
+            amount={allIn}
+            setCurrentBet={setCurrentBet}
+          />
+          <BetInput
+            isMyTurn={isMyTurn}
+            currentBet={currentBet}
+            setCurrentBet={setCurrentBet}
+            minBet={minBet}
+            allIn={allIn}
+          />
         </div>
         <div className="actionBtns">
           <Button action="Fold" isMyTurn={isMyTurn} setIsMyTurn={setIsMyTurn} />
