@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import styles from "pages/play/components/table/player.module.css";
 import Card from "pages/play/components/table/card";
+import classNames from "classnames";
 
-const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
+const Player = ({
+  name,
+  pic,
+  position,
+  money,
+  bet,
+  cardSet,
+  showHand,
+  myTurn,
+  isDealer,
+  isSmallBlind,
+  isBigBlind
+}) => {
   const [cards, setCards] = useState([
     [cardSet[0][0], cardSet[0][1]],
     [cardSet[1][0], cardSet[1][1]]
@@ -12,9 +25,26 @@ const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
 
   return (
     <div className={styles["playerProfile" + position]}>
+      <div
+        className={classNames(
+          isDealer
+            ? styles.dealerChip
+            : isSmallBlind
+            ? styles.sBChip
+            : isBigBlind
+            ? styles.bBChip
+            : styles.noChip,
+          isDealer || isSmallBlind || isBigBlind
+            ? styles["hasChip" + position]
+            : styles.noChip
+        )}
+      >
+        {isDealer ? "D" : isSmallBlind ? "SB" : isBigBlind ? "BB" : ""}
+      </div>
       <div className={styles["playerBet" + position]} style={style}>
         <span>&#10050;</span>${bet}
       </div>
+
       <div className={styles["playerCards" + position]}>
         {cards.map((card, i) => (
           <Card
@@ -25,7 +55,13 @@ const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
           />
         ))}
       </div>
-      <div className={styles.playerDetailsWrapper}>
+      <div
+        className={
+          myTurn
+            ? styles.playerDetailsWrapperOnTurn
+            : styles.playerDetailsWrapper
+        }
+      >
         <img className={styles.circleCrop} src={pic} alt="user" />
         <div className={styles.playerNameMoneyWrapper}>
           <div className={styles.playerDetails}>{name}</div>

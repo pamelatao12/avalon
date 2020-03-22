@@ -1,19 +1,19 @@
 .playerProfile1 {
   position: absolute;
-  top: 78%;
+  top: 72%;
   left: 45%;
 }
 
 .playerProfile2 {
   position: absolute;
-  top: 76%;
+  top: 72%;
   left: 22%;
 }
 
 .playerProfile3 {
   position: absolute;
   top: 40%;
-  left: 7%;
+  left: 3%;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -60,21 +60,8 @@
 
 .playerProfile9 {
   position: absolute;
-  top: 76%;
+  top: 72%;
   left: 68%;
-}
-
-.noBet {
-  visibility: hidden;
-  padding: 6px;
-  background-color: dimgray;
-  /* margin-left: 40px; */
-  border-radius: 10px;
-  font-weight: bolder;
-  max-width: 62px;
-  max-height: 20px;
-  color: white;
-  border: 1px solid black;
 }
 
 .playerBet1,
@@ -101,6 +88,7 @@
   margin-left: 50px;
   margin-bottom: 20px;
 }
+
 .playerBet5,
 .playerBet6 {
   margin-left: 50px;
@@ -128,6 +116,80 @@
 .playerBet9 {
   margin-right: 120px;
   margin-bottom: 20px;
+}
+
+.dealerChip {
+  border: 1px black solid;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  background-color: white;
+  line-height: 25px;
+}
+
+.sBChip {
+  border: 1px black solid;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  background-color: mediumslateblue;
+  line-height: 25px;
+}
+
+.bBChip {
+  border: 1px black solid;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  background-color: gold;
+  line-height: 25px;
+}
+
+.hasChip1 {
+  margin-left: 5%;
+}
+
+.hasChip2 {
+  margin-left: 80px;
+}
+
+/* .hasChip3 {
+  margin-right: 80px;
+} */
+
+.hasChip4,
+.hasChip5,
+.hasChip6 {
+  margin-left: 100%;
+}
+
+.hasChip7 {
+  margin-top: 8%;
+}
+
+.hasChip8 {
+  margin-top: 20%;
+}
+
+.hasChip9 {
+  margin-left: 30%;
+}
+
+.noChip {
+  border: 1px black solid;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  background-color: coral;
+  visibility: hidden;
 }
 
 .playerCards1,
@@ -172,6 +234,16 @@
   display: flex;
   min-width: 120px;
   max-width: 120px;
+}
+
+.playerDetailsWrapperOnTurn {
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  min-width: 120px;
+  max-width: 120px;
+  box-shadow: 0 0px 10px 2px darksalmon, 0 0px 10px 2px antiquewhite;
+  background-color: lightcoral;
 }
 
 .playerDetails {
