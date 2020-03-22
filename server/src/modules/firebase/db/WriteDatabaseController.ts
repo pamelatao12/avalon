@@ -1,4 +1,4 @@
-import { db } from 'src/app'
+import { db } from "./";
 
 // update should be default method to write to db to resolve any changes without deleting sibling keys that are unspecified in the payload
 export const UpdateDataController = (payload: object, path: string): void => {
