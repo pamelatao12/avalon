@@ -1,12 +1,12 @@
 .playerProfile1 {
   position: absolute;
-  top: 90%;
+  top: 78%;
   left: 45%;
 }
 
 .playerProfile2 {
   position: absolute;
-  top: 80%;
+  top: 76%;
   left: 22%;
 }
 
@@ -53,15 +53,81 @@
 .playerProfile8 {
   position: absolute;
   top: 40%;
-  left: 76%;
+  left: 72%;
   display: flex;
   flex-direction: row;
 }
 
 .playerProfile9 {
   position: absolute;
-  top: 80%;
+  top: 76%;
   left: 68%;
+}
+
+.noBet {
+  visibility: hidden;
+  padding: 6px;
+  background-color: dimgray;
+  /* margin-left: 40px; */
+  border-radius: 10px;
+  font-weight: bolder;
+  max-width: 62px;
+  max-height: 20px;
+  color: white;
+  border: 1px solid black;
+}
+
+.playerBet1,
+.playerBet2,
+.playerBet3,
+.playerBet4,
+.playerBet5,
+.playerBet6,
+.playerBet7,
+.playerBet8,
+.playerBet9 {
+  padding: 6px;
+  background-color: dimgray;
+  /* margin-left: 40px; */
+  border-radius: 10px;
+  font-weight: bolder;
+  max-width: 62px;
+  max-height: 20px;
+  color: white;
+  border: 1px solid black;
+}
+
+.playerBet1 {
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+.playerBet5,
+.playerBet6 {
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.playerBet2 {
+  margin-left: 120px;
+  margin-bottom: 20px;
+}
+
+.playerBet3 {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+.playerBet4 {
+  margin-left: 150px;
+}
+
+.playerBet8 {
+  margin-top: 30px;
+  margin-right: 20px;
+}
+
+.playerBet9 {
+  margin-right: 120px;
+  margin-bottom: 20px;
 }
 
 .playerCards1,
@@ -105,6 +171,7 @@
   padding: 8px;
   display: flex;
   min-width: 120px;
+  max-width: 120px;
 }
 
 .playerDetails {

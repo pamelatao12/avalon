@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import "pages/play/components/table/player.css";
 import Card from "pages/play/components/table/card";
 
-const Player = ({ name, pic, position, money, cardSet, showHand }) => {
+const Player = ({ name, pic, position, money, bet, cardSet, showHand }) => {
   const [cards, setCards] = useState([
     [cardSet[0][0], cardSet[0][1]],
     [cardSet[1][0], cardSet[1][1]]
   ]);
+
+  const style = cardSet[0][0] === "" ? { visibility: "hidden" } : {};
+
   return (
     <div className={`playerProfile${position}`}>
+      <div className={`playerBet${position}`} style={style}>
+        <span>&#10050;</span>${bet}
+      </div>
       <div className={`playerCards${position}`}>
         {cards.map((card, i) => (
           <Card
