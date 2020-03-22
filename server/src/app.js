@@ -7,6 +7,7 @@ import { PORT } from "./config";
 // Set up app with our own router.
 const app = express();
 app.use(router);
+app.set("json spaces", 2);
 
 const server = http.createServer(app);
 const io = socketIo(server); // < Interesting!
