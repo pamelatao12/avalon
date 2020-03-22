@@ -4,7 +4,7 @@
   padding: 10px 22px;
   margin: 6px;
   color: white;
-  border-style: solid white 1px;
+  border: solid white 1px;
   border-radius: 4px;
 }
 
@@ -32,4 +32,12 @@
 
 .raise {
   background-color: rgb(0, 106, 112);
+}
+
+.disabled {
+  background-color: grey;
+}
+
+.disabled:hover {
+  cursor: auto;
 }

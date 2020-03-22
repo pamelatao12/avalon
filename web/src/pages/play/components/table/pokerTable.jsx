@@ -5,15 +5,15 @@ import Player from "pages/play/components/table/player";
 
 const PokerTable = () => {
   const [players, setPlayers] = useState([
-    ["Pamela", "./yay.jpg", 1, false],
-    ["David", "./yay2.jpg", 2, true],
-    ["Lance", "./yay3.jpg", 3, true],
-    ["Peter", "./yay4.jpg", 4, true],
-    ["Joe", "./yay5.jpg", 5, true],
-    ["Anthony", "./yay6.jpg", 6, true],
-    ["Carmen", "./yay7.jpg", 7, true],
-    ["Yaslin", "./yay8.jpg", 8, true],
-    ["Earl", "./yay9.jpg", 9, false]
+    ["Pamela", "./yay.jpg", 1, [["", ""], ["", ""]]],
+    ["David", "./yay2.jpg", 2, [["2", "SPADE"], ["Q", "HEART"]]],
+    ["Lance", "./yay3.jpg", 3, [["A", "CLUB"], ["6", "HEART"]]],
+    ["Peter", "./yay4.jpg", 4, [["K", "DIAMOND"], ["8", "SPADE"]]],
+    ["Joe", "./yay5.jpg", 5, [["J", "CLUB"], ["4", "CLUB"]]],
+    ["Anthony", "./yay6.jpg", 6, [["J", "SPADE"], ["A", "HEART"]]],
+    ["Carmen", "./yay7.jpg", 7, [["9", "DIAMOND"], ["10", "DIAMOND"]]],
+    ["Yaslin", "./yay8.jpg", 8, [["5", "HEART"], ["5", "CLUB"]]],
+    ["Earl", "./yay9.jpg", 9, [["", ""], ["", ""]]]
   ]);
 
   return (
@@ -24,7 +24,7 @@ const PokerTable = () => {
             name={player[0]}
             pic={player[1]}
             position={player[2]}
-            playing={player[3]}
+            cardSet={player[3]}
             key={i}
           />
         ))}

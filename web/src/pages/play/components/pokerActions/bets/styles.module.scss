@@ -13,3 +13,11 @@
 .amountBtn:hover {
   cursor: pointer;
 }
+
+.disabled {
+  background-color: grey;
+}
+
+.disabled:hover {
+  cursor: auto;
+}
