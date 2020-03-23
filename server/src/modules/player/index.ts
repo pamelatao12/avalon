@@ -21,6 +21,11 @@ export const sitAtTable = async (
   tableId: string = "-M33QUXuHYBlHzFJjZ1V",
   seatNumber: number = 1
 ) => {
+  /**
+   * TODO: Perform this in a single transaction. Verify that no other player is
+   * in this seat right now.
+   */
+
   const player: Player = {
     currentBetSize: null,
     holeCards: null,
