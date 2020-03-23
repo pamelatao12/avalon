@@ -6,7 +6,7 @@ import {
   debugGetTable,
   debugListTables
 } from "../table/debug";
-import { debugSitAtTAble } from "../player/debug";
+import { debugSitAtTable } from "../player/debug";
 
 const router = express.Router();
 
@@ -32,6 +32,6 @@ router.get("/debug/table/:id", debugGetTable);
 /**
  * Player debug endpoints.
  */
-router.get("/debug/player/sitAtTable", debugSitAtTAble);
+router.get("/debug/player/sitAtTable", debugSitAtTable);
 
 export default router;

@@ -96,4 +96,6 @@ export const getTable = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
 /**
  * Starts the game, only if there are at least 2 players.
  */
-export const startGame = () => {};
+export const startGame = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
+  // TODO: Transactionally start the game if it hasn't already started.
+};

@@ -1,7 +1,7 @@
 import express from "express";
 import { sitAtTable } from "./";
 
-export const debugSitAtTAble = async (
+export const debugSitAtTable = async (
   req: express.Request,
   res: express.Response
 ) => {
