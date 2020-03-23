@@ -1,8 +1,9 @@
 import express from "express";
 import http from "http";
+import 'module-alias/register'
 import socketIo from "socket.io";
-import router from "./modules/router";
-import { PORT } from "./config";
+import router from "@/modules/router";
+import { PORT } from "@/config";
 
 // Set up app with our own router.
 const app = express();

@@ -1,5 +1,5 @@
 import database from "../firebase/db";
-import { Table, TableSettings } from "src/types";
+import { Table, TableSettings } from "../../types";
 import { initializeGame } from "../game";
 
 /**
