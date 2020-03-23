@@ -5,12 +5,12 @@ import { Player, Players, SeatState } from "../../types";
  * TODO: Remove default values once we are ready to accept user requests. These
  * were added to make testing easier.
  */
-const player: Player = {
+const newPlayer: Player = {
   currentBetSize: null,
   holeCards: null,
   isBigBlind: false,
   isDealer: false,
-  isFolded: false,
+  isFolded: true,
   isSmallBlind: false,
   seatState: SeatState.SEATED,
   stackSize: 2000,
@@ -29,32 +29,34 @@ export const sitAtTable = async (
         return;
       }
 
-      return player;
+      return newPlayer;
     }
   );
 
-  return committed ? player : undefined;
+  return committed ? newPlayer : undefined;
 };
 
+/**
+ * TODO: Check if player is currently folded.
+ */
 export const standUp = async (
   tableId: string = "-M33QUXuHYBlHzFJjZ1V",
   seatNumber: number = 1
 ) => {
   const committed = await database.setInTransaction(
     `tables/${tableId}/players/${seatNumber}/seatState`,
-    (currentData: any) =>  {
+    (currentData: any) => {
       if (currentData === SeatState.SEATED) {
-        return SeatState.STANDING
+        return SeatState.STANDING;
       }
     }
-  )
-  return committed ? SeatState.STANDING : null
-  /**
-   * TODO: Mark player as standing.
-   */
-
+  );
+  return committed ? SeatState.STANDING : null;
 };
 
+/**
+ * TODO: Check if player is currently folded.
+ */
 export const leaveTable = async (
   tableId: string = "-M33QUXuHYBlHzFJjZ1V",
   seatNumber: number = 1
@@ -62,9 +64,9 @@ export const leaveTable = async (
   const committed = await database.setInTransaction(
     `tables/${tableId}/players/${seatNumber}`,
     () => null
-  )
+  );
   // return true if successfully cleared the seat
-  return committed === null
+  return committed === null;
   /**
    * TODO: Remove player from table.
    */
