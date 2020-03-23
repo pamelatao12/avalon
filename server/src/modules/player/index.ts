@@ -17,6 +17,11 @@ type Player = {
   userId: string;
 };
 
+/**
+ * TODO: Remove default values once we are ready to accept user requests. These
+ * were added to make testing easier.
+ */
+
 export const sitAtTable = async (
   tableId: string = "-M33QUXuHYBlHzFJjZ1V",
   seatNumber: number = 1
@@ -40,4 +45,19 @@ export const sitAtTable = async (
 
   await database.set(`tables/${tableId}/players/${seatNumber}`, player);
   return player;
+};
+
+export const standUp = async () => {
+  /**
+   * TODO: Mark player as standing.
+   */
+};
+
+export const leaveTable = async (
+  tableId: string = "-M33QUXuHYBlHzFJjZ1V",
+  seatNumber: number = 1
+) => {
+  /**
+   * TODO: Remove player from table.
+   */
 };
