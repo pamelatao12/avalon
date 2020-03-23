@@ -10,25 +10,19 @@ import { PORT } from "config";
 // Set up app with our own router.
 const app = express();
 app.use(router);
+// Prettify JSON responses.
 app.set("json spaces", 2);
 
 const server = http.createServer(app);
-const io = socketIo(server); // < Interesting!
-
-const getApiAndEmit = async socket => {
-  socket.emit("FromAPI", new Date()); // Emitting a new message. It will be consumed by the client
-};
-
-let interval;
+const io = socketIo(server);
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 io.on("connection", socket => {
   console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
+
+  // Emit a new message that can be consumed by the client.
+  socket.emit("FromAPI", new Date());
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
