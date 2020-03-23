@@ -4,7 +4,8 @@ import { debugClearAll, debugViewDatabase } from "../firebase/db/debug";
 import {
   debugCreateTable,
   debugGetTable,
-  debugListTables
+  debugListTables,
+  debugStartGame
 } from "../table/debug";
 import { debugSitAtTable } from "../player/debug";
 
@@ -28,6 +29,7 @@ router.get("/debug/db/clear", debugClearAll);
 router.get("/debug/table/create", debugCreateTable);
 router.get("/debug/table", debugListTables);
 router.get("/debug/table/:id", debugGetTable);
+router.get("/debug/table/start", debugStartGame);
 
 /**
  * Player debug endpoints.

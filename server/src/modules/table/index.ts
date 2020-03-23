@@ -1,5 +1,6 @@
 import database from "../firebase/db";
 import { Table, TableSettings } from "src/types";
+import { initializeGame } from "../game";
 
 /**
  * Default table settings.
@@ -43,12 +44,11 @@ export const startGame = async (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
   // TODO: This is not trivial because we have to initiate the game state as
   // well.
 
-  const committed = await database.setInTransaction(
-    `tables/${tableId}`,
-    (currentData: Table) => {
-      if (currentData.hasStarted) {
-        return;
-      }
+  await database.setInTransaction(`tables/${tableId}`, (currentData: Table) => {
+    if (currentData.hasStarted) {
+      return;
     }
-  );
+
+    return initializeGame(currentData);
+  });
 };
