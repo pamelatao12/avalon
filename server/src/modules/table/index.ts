@@ -1,7 +1,7 @@
-import database from "../firebase/db";
-import { Table, TableSettings } from "../../types";
-import { initializeGame } from "../game";
-import { getNumPlayers } from "../player";
+import database from "modules/firebase/db";
+import { Table, TableSettings } from "types";
+import { initializeGame } from "modules/game";
+import { getNumPlayers } from "modules/player";
 
 /**
  * Default table settings.
