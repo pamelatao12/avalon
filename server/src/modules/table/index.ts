@@ -1,8 +1,5 @@
 import database from "../firebase/db";
-import { createTableSid } from "../sid";
-
-// TODO: Use a random string generator instead.
-const TABLE_ID = "2";
+import { Player } from "../player";
 
 const MAX_PLAYER_COUNT = 9;
 
@@ -16,10 +13,6 @@ type TableSettings = {
   bigBlind: number;
   buyIn: number;
   smallBlind: number;
-};
-
-type Player = {
-  id: string;
 };
 
 type Players = {
@@ -92,6 +85,19 @@ export const createTable = async () => {
   return { [key]: table };
 };
 
-export const getTable = () => {
+export const listTables = () => {
   return database.read("tables");
+};
+
+export const getTable = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
+  return database.read(`tables/${tableId}`);
+};
+
+/**
+ * Starts the game, only if there are at least 2 players.
+ */
+export const startGame = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
+  // TODO: Transactionally start the game if it hasn't already started.
+  // TODO: This is not trivial because we have to initiate the game state as
+  // well.
 };

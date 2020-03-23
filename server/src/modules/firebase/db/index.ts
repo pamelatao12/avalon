@@ -18,9 +18,31 @@ export const db = firebaseAdmin.database();
 /**
  * Write or replace data to a defined path, like messages/users/<username>.
  */
-const set = (path: string, payload: any): Promise<void> => {
+const set = async (path: string, payload: any): Promise<void> => {
   const ref = db.ref(path);
-  return ref.set(payload);
+  await ref.set(payload);
+};
+
+/**
+ * Like set, but wraps the write in a transaction and returns whether the write
+ * was committed. If the payload function aborts, nothing will be written.
+ */
+const setInTransaction = async (
+  path: string,
+  payloadFunction: any
+): Promise<boolean> => {
+  const ref = db.ref(path);
+  const { committed } = await ref.transaction(
+    payloadFunction,
+    (error, committed) => {
+      if (error) {
+        console.log(`Transaction failed abnormally: ${error}`);
+      } else if (!committed) {
+        console.log("Aborted transaction");
+      }
+    }
+  );
+  return committed;
 };
 
 /**
@@ -53,6 +75,7 @@ const clearAll = (): Promise<void> => {
 
 export default {
   set,
+  setInTransaction,
   push,
   read,
   clearAll

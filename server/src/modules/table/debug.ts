@@ -1,5 +1,5 @@
 import express from "express";
-import { createTable, getTable } from ".";
+import { createTable, getTable, listTables } from ".";
 
 export const debugCreateTable = async (
   req: express.Request,
@@ -9,10 +9,18 @@ export const debugCreateTable = async (
   res.send(table).status(201);
 };
 
+export const debugListTables = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const tables = await listTables();
+  res.send(tables).status(200);
+};
+
 export const debugGetTable = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const table = await getTable();
+  const table = await getTable(req.params.id);
   res.send(table).status(200);
 };
