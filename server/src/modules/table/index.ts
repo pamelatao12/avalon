@@ -1,4 +1,5 @@
 import database from "../firebase/db";
+import { Player } from "../player";
 
 const MAX_PLAYER_COUNT = 9;
 
@@ -12,10 +13,6 @@ type TableSettings = {
   bigBlind: number;
   buyIn: number;
   smallBlind: number;
-};
-
-type Player = {
-  id: string;
 };
 
 type Players = {

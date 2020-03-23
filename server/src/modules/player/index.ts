@@ -5,7 +5,7 @@ enum SeatState {
   STANDING = "standing"
 }
 
-type Player = {
+export type Player = {
   currentBetSize: number | null;
   holeCards: string | null;
   isDealer: boolean;
@@ -26,11 +26,6 @@ export const sitAtTable = async (
   tableId: string = "-M33QUXuHYBlHzFJjZ1V",
   seatNumber: number = 1
 ) => {
-  /**
-   * TODO: Perform this in a single transaction. Verify that no other player is
-   * in this seat right now.
-   */
-
   const player: Player = {
     currentBetSize: null,
     holeCards: null,
@@ -43,8 +38,18 @@ export const sitAtTable = async (
     userId: "davidvcho@gmail.com"
   };
 
-  await database.set(`tables/${tableId}/players/${seatNumber}`, player);
-  return player;
+  const committed = await database.setInTransaction(
+    `tables/${tableId}/players/${seatNumber}`,
+    (currentData: any) => {
+      if (currentData) {
+        return;
+      }
+
+      return player;
+    }
+  );
+
+  return committed ? player : undefined;
 };
 
 export const standUp = async () => {
