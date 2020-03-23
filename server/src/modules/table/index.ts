@@ -98,4 +98,6 @@ export const getTable = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
  */
 export const startGame = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
   // TODO: Transactionally start the game if it hasn't already started.
+  // TODO: This is not trivial because we have to initiate the game state as
+  // well.
 };
