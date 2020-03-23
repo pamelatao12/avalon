@@ -85,6 +85,15 @@ export const createTable = async () => {
   return { [key]: table };
 };
 
-export const getTable = () => {
+export const listTables = () => {
   return database.read("tables");
 };
+
+export const getTable = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
+  return database.read(`tables/${tableId}`);
+};
+
+/**
+ * Starts the game, only if there are at least 2 players.
+ */
+export const startGame = () => {};
