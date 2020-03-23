@@ -1,21 +1,5 @@
 import database from "../firebase/db";
-
-enum SeatState {
-  SEATED = "seated",
-  STANDING = "standing"
-}
-
-export type Player = {
-  currentBetSize: number | null;
-  holeCards: string | null;
-  isDealer: boolean;
-  isFolded: boolean;
-  isSmallBlind: boolean;
-  isBigBlind: boolean;
-  seatState: SeatState;
-  stackSize: number;
-  userId: string;
-};
+import { Player, SeatState } from "../../types";
 
 /**
  * TODO: Remove default values once we are ready to accept user requests. These

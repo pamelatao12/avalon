@@ -1,61 +1,14 @@
 import database from "../firebase/db";
-import { Player } from "../player";
+import { Table, TableSettings } from "src/types";
+import { initializeGame } from "../game";
 
+/**
+ * Default table settings.
+ */
 const MAX_PLAYER_COUNT = 9;
-
 const SETTINGS_SMALL_BLIND = 10;
 const SETTINGS_BIG_BLIND = 20;
 const SETTINGS_BUY_IN = 2000;
-
-type PlayerKeys = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
-
-type TableSettings = {
-  bigBlind: number;
-  buyIn: number;
-  smallBlind: number;
-};
-
-type Players = {
-  [key in PlayerKeys]: Player | null;
-};
-
-type BetSizes = {
-  currentBetSize: number;
-  minBet: number;
-  halfPot: number;
-  pot: number;
-};
-
-enum Turn {
-  PREFLOP = "preflop",
-  FLOP = "flop",
-  TURN = "turn",
-  RIVER = "river"
-}
-
-type Board = {
-  flopCard1: string | null;
-  flopCard2: string | null;
-  flopCard3: string | null;
-  turnCard: string | null;
-  riverCard: string | null;
-  turn: Turn;
-};
-
-type Game = {
-  betSizes: BetSizes;
-  potSize: number;
-  // Player number whose turn it is.
-  whoseTurn: number;
-  board: Board;
-};
-
-type Table = {
-  game: Game | null;
-  hasStarted: boolean;
-  settings: TableSettings;
-  players: Players;
-};
 
 export const createTable = async () => {
   const tableSettings: TableSettings = {
@@ -67,17 +20,7 @@ export const createTable = async () => {
   const table: Table = {
     game: null,
     hasStarted: false,
-    players: {
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null,
-      6: null,
-      7: null,
-      8: null,
-      9: null
-    },
+    players: {},
     settings: tableSettings
   };
 
@@ -96,8 +39,16 @@ export const getTable = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
 /**
  * Starts the game, only if there are at least 2 players.
  */
-export const startGame = (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
+export const startGame = async (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
   // TODO: Transactionally start the game if it hasn't already started.
   // TODO: This is not trivial because we have to initiate the game state as
   // well.
+
+  await database.setInTransaction(`tables/${tableId}`, (currentData: Table) => {
+    if (currentData.hasStarted) {
+      return;
+    }
+
+    return initializeGame(currentData);
+  });
 };
