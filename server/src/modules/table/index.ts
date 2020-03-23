@@ -1,6 +1,7 @@
 import database from "../firebase/db";
 import { Table, TableSettings } from "../../types";
 import { initializeGame } from "../game";
+import { getNumPlayers } from "../player";
 
 /**
  * Default table settings.
@@ -44,11 +45,23 @@ export const startGame = async (tableId: string = "-M33QUXuHYBlHzFJjZ1V") => {
   // TODO: This is not trivial because we have to initiate the game state as
   // well.
 
+  // TODO: Unclear why getTable here returns a snapshot instead of a val.
+  const table: Table = (await getTable(tableId)).val();
+
+  if (table.hasStarted || getNumPlayers(table.players) < 2) {
+    return;
+  }
+
   await database.setInTransaction(`tables/${tableId}`, (currentData: Table) => {
-    if (currentData.hasStarted) {
+    if (
+      currentData &&
+      (currentData.hasStarted || getNumPlayers(table.players) < 2)
+    ) {
       return;
     }
 
-    return initializeGame(currentData);
+    // TODO: Return this value once it is fully completed.
+    initializeGame(table);
+    return currentData;
   });
 };

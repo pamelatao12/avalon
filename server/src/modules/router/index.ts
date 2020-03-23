@@ -28,12 +28,12 @@ router.get("/debug/db/clear", debugClearAll);
  */
 router.get("/debug/table/create", debugCreateTable);
 router.get("/debug/table", debugListTables);
-router.get("/debug/table/:id", debugGetTable);
+// router.get("/debug/table/:id", debugGetTable);
 router.get("/debug/table/start", debugStartGame);
 
 /**
  * Player debug endpoints.
  */
-router.get("/debug/player/sitAtTable", debugSitAtTable);
+router.get("/debug/player/sit", debugSitAtTable);
 
 export default router;

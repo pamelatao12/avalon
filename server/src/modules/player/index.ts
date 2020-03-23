@@ -1,5 +1,5 @@
 import database from "../firebase/db";
-import { Player, SeatState } from "../../types";
+import { Player, Players, SeatState } from "../../types";
 
 /**
  * TODO: Remove default values once we are ready to accept user requests. These
@@ -22,8 +22,9 @@ export const sitAtTable = async (
   seatNumber: number = 1
 ) => {
   const committed = await database.setInTransaction(
-    `tables/${tableId}/players/${seatNumber}`,
+    `tables/${tableId}/players/seat${seatNumber}`,
     (currentData: any) => {
+      // Seat is already taken.
       if (currentData) {
         return;
       }
@@ -67,4 +68,9 @@ export const leaveTable = async (
   /**
    * TODO: Remove player from table.
    */
+};
+
+export const getNumPlayers = (players: Players) => {
+  // TODO: Compute number of players.
+  return 4;
 };

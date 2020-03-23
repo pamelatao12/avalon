@@ -23,7 +23,7 @@ export type Player = {
 
 export type Players = {
   // Keyed on the seat number, 1-9.
-  [key in string]: Player | null;
+  [key in string]: Player;
 };
 
 export type BetSizes = {
@@ -51,15 +51,15 @@ export type Board = {
 
 export type Game = {
   betSizes: BetSizes;
+  board: Board;
   potSize: number;
   // Player number whose turn it is.
   whoseTurn: number;
-  board: Board;
 };
 
 export type Table = {
   game: Game | null;
   hasStarted: boolean;
-  settings: TableSettings;
   players: Players;
+  settings: TableSettings;
 };
