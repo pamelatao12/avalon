@@ -11,7 +11,10 @@ const PokerTable = () => {
       1,
       20.55,
       0.0,
-      [["A", "HEART"], ["A", "HEART"]],
+      [
+        ["A", "HEART"],
+        ["A", "HEART"]
+      ],
       false,
       false,
       false,
@@ -24,7 +27,10 @@ const PokerTable = () => {
       2,
       20.0,
       2.0,
-      [["2", "SPADE"], ["Q", "HEART"]],
+      [
+        ["2", "SPADE"],
+        ["Q", "HEART"]
+      ],
       true,
       false,
       true,
@@ -37,7 +43,10 @@ const PokerTable = () => {
       3,
       10.0,
       1.25,
-      [["A", "CLUB"], ["6", "HEART"]],
+      [
+        ["A", "CLUB"],
+        ["6", "HEART"]
+      ],
       true,
       true,
       false,
@@ -50,7 +59,10 @@ const PokerTable = () => {
       4,
       25.0,
       1.25,
-      [["K", "DIAMOND"], ["8", "SPADE"]],
+      [
+        ["K", "DIAMOND"],
+        ["8", "SPADE"]
+      ],
       true,
       false,
       false,
@@ -63,7 +75,10 @@ const PokerTable = () => {
       5,
       10.0,
       1.25,
-      [["J", "CLUB"], ["4", "CLUB"]],
+      [
+        ["J", "CLUB"],
+        ["4", "CLUB"]
+      ],
       true,
       false,
       false,
@@ -76,7 +91,10 @@ const PokerTable = () => {
       6,
       20.0,
       1.25,
-      [["J", "SPADE"], ["A", "HEART"]],
+      [
+        ["J", "SPADE"],
+        ["A", "HEART"]
+      ],
       true,
       false,
       false,
@@ -89,7 +107,10 @@ const PokerTable = () => {
       7,
       20.0,
       1.25,
-      [["9", "DIAMOND"], ["10", "DIAMOND"]],
+      [
+        ["9", "DIAMOND"],
+        ["10", "DIAMOND"]
+      ],
       true,
       false,
       false,
@@ -102,7 +123,10 @@ const PokerTable = () => {
       8,
       10.0,
       1.25,
-      [["5", "HEART"], ["5", "CLUB"]],
+      [
+        ["5", "HEART"],
+        ["5", "CLUB"]
+      ],
       true,
       false,
       false,
@@ -115,7 +139,10 @@ const PokerTable = () => {
       9,
       20.0,
       0,
-      [["", ""], ["", ""]],
+      [
+        ["", ""],
+        ["", ""]
+      ],
       false,
       false,
       false,
