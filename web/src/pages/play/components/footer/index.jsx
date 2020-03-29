@@ -9,7 +9,7 @@ export const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Buy the developer a coffee.
+        Buy the developer a coffee
       </a>
     </div>
   );
