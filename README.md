@@ -2,7 +2,7 @@
 
 > This project is a realtime, fullstack web app built with React and Node.js to play multi-player Texas Hold'em Poker. Up to 10 players maximum with full game functionality and action record log.
 
-- *Note: The full, complete code base is stored in a private repository under the <a href="https://github.com/davidvcho.com" target="_blank">lead developer's github</a> for security purposes.
+- Note: The full, complete code base is stored in a private repository under the <a href="https://github.com/davidvcho.com" target="_blank">lead developer's github</a> for security purposes.
 
 ---
 
